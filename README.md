@@ -23,13 +23,11 @@
 - [面向小白的Github_Action使用workflow自动编译lean_openwrt教程](https://zhuanlan.zhihu.com/p/94402324)
 - [关于Github Action自动编译Lean_Openwrt的配置修改问题](https://zhuanlan.zhihu.com/p/94527343)
 
-### 1. 注册GitHub账号并开启GitHub Actions (自行搜索方法).
+### 1. fork [coolsnowwolf/lede](https://github.com/coolsnowwolf/lede) 或者 [OpenWrt trunk](https://github.com/openwrt/openwrt).
 
-### 2. fork [coolsnowwolf/lede](https://github.com/coolsnowwolf/lede) 或者 [OpenWrt trunk](https://github.com/openwrt/openwrt).
+### 2. 上传`openwrt-ci.yml`和`merge-upstream.yml`到`/.github/workflows/`下.
 
-### 3. 上传`openwrt-ci.yml`和`merge-upstream.yml`到`/.github/workflows/`下.
-
-### 4. 定制固件:
+### 3. 定制固件:
 
 > 如果你希望定制你的固件:
 
