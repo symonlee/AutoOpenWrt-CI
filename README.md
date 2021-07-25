@@ -17,11 +17,6 @@
 - 自己的OpenWrt分支 ([Lean源](https://github.com/coolsnowwolf/lede)或者[官方源](https://github.com/openwrt/openwrt/))
 - 脑子
 
-### 相关文章: 作者-糖炒栗子 
-
-- [面向小白的Github_Action使用workflow自动编译lean_openwrt教程](https://zhuanlan.zhihu.com/p/94402324)
-- [关于Github Action自动编译Lean_Openwrt的配置修改问题](https://zhuanlan.zhihu.com/p/94527343)
-
 ### 1. fork [coolsnowwolf/lede](https://github.com/coolsnowwolf/lede) 或者 [OpenWrt trunk](https://github.com/openwrt/openwrt).
 
 ### 2. 上传`openwrt-ci.yml`和`merge-upstream.yml`到`/.github/workflows/`下.
