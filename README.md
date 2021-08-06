@@ -4,8 +4,6 @@
 
 ## 使用教程:
 
-### 在一切开始前, 你需要的是:
-
 - [基本的Git技能](https://www.liaoxuefeng.com/wiki/896043488029600)
 - 自己的OpenWrt分支 ([Lean源](https://github.com/coolsnowwolf/lede)或者[官方源](https://github.com/openwrt/openwrt/))
 
