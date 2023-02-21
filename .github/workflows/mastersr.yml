@@ -87,7 +87,6 @@ jobs:
 
       - name: 载入自定义配置
         run: |
-          sed -i 's/attendedsysupgrade/sqm/g' feeds/luci/collections/luci/Makefile
           sed -i "s/timezone='.*'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
           sed -i "/.*ttylogin='0'.*/i\                                set system.@system[-1].zonename='Asia/Hong Kong'" package/base-files/files/bin/config_generate
           rm -f ./.config*
@@ -136,6 +135,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-ksmbd=y
           CONFIG_PACKAGE_luci-app-opkg=y
+          CONFIG_PACKAGE_luci-app-sqm=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
