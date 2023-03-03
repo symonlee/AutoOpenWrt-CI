@@ -80,7 +80,7 @@ jobs:
           cd openwrt-packages
           git clone https://github.com/symonlee/luci-app-adguardhome
           git clone https://github.com/symonlee/openwrt-smartdns xipk
-          svn co https://github.com/symonlee/pd-adg-etc/trunk/ipv6-helper
+          svn co https://github.com/Lienol/openwrt-package/branches/other/lean/ipv6-helper
           git clone https://github.com/xiaorouji/openwrt-passwall
           git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           pushd luci-app-passwall/luci-app-passwall/root/etc
