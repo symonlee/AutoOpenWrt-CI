@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: 📡ikghxpwqbt
+name: testmasterpw
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-21.02 --single-branch https://github.com/ikghx/openwrt-life openwrt
+          git clone -b master --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
       - name: 更新feeds源
@@ -55,36 +55,19 @@ jobs:
         run: |
           pushd feeds/packages/net
           rm -rf adguardhome
-          rm -rf brook
-          rm -rf chinadns-ng
-          rm -rf dns2socks
-          rm -rf dns2tcp
           rm -rf dnsproxy
-          rm -rf hysteria
-          rm -rf ipt2socks
           rm -rf microsocks
-          rm -rf naiveproxy
-          rm -rf pdnsd-alt
-          rm -rf shadowsocks-rust
-          rm -rf shadowsocksr-libev
-          rm -rf simple-obfs
           rm -rf smartdns
-          rm -rf ssocks
-          rm -rf tcping
-          rm -rf trojan
           rm -rf trojan-go
-          rm -rf trojan-plus
           rm -rf v2ray-core
           rm -rf v2ray-geodata
-          rm -rf v2ray-plugin
           rm -rf xray-core
-          rm -rf xray-plugin
 
       - name: 删除部分luci文件
         run: |
           pushd feeds/luci/applications
           rm -rf luci-app-adguardhome
-          rm -rf luci-app-passwall
+          rm -rf luci-app-pbr
 
       - name: 安装feeds源
         run: |
@@ -105,10 +88,8 @@ jobs:
 
       - name: 载入自定义配置
         run: |
-          sed -i 's/192.168.9.1/192.168.1.1/g' package/base-files/files/bin/config_generate
-          sed -i 's/OpenWrt-Life/OpenWrt/g' package/base-files/files/bin/config_generate
-          sed -i 's/%D %V %C/OpenWrt 21.02-SNAPSHOT 21.02/g' package/base-files/files/etc/openwrt_release
-          sed -i '6,$d' package/base-files/files/etc/banner
+          sed -i "s/timezone='.*'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
+          sed -i "/.*ttylogin='0'.*/i\                                set system.@system[-1].zonename='Asia/Hong Kong'" package/base-files/files/bin/config_generate
           rm -f ./.config*
           touch ./.config
           cat >> .config <<EOF
@@ -153,6 +134,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-adguardhome=y
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
+          CONFIG_PACKAGE_luci-app-ksmbd=y
           CONFIG_PACKAGE_luci-app-opkg=y
           CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
@@ -165,8 +147,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
-          CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-sqm=y
 
           # 常用软件包:
@@ -179,10 +159,7 @@ jobs:
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_luci=y
           CONFIG_PACKAGE_luci-theme-bootstrap=y
-          CONFIG_PACKAGE_kmod-ipt-fullconenat=y
           CONFIG_PACKAGE_kmod-tcp-bbr=y
-          CONFIG_PACKAGE_iptables-mod-fullconenat=y
-          CONFIG_PACKAGE_ip6tables-mod-fullconenat=y
           # CONFIG_PACKAGE_wpad-basic-wolfssl is not set
           # CONFIG_XRAY_CORE_COMPRESS_UPX is not set
           
