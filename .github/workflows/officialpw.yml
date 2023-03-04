@@ -26,10 +26,10 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@main
+      - name: 校验本地文件
+        uses: actions/checkout@main
 
-    - name: 初始化系统环境
+      - name: 初始化系统环境
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
