@@ -79,7 +79,7 @@ jobs:
           cd openwrt-packages
           git clone https://github.com/symonlee/luci-app-adguardhome
           git clone https://github.com/symonlee/openwrt-smartdns xipk
-          svn co https://github.com/symonlee/pd-adg-etc/trunk/luci-app-flowoffload
+          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-turboacc
           svn co https://github.com/kiddin9/openwrt-packages/trunk/qBittorrent-static
           svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-qbittorrent-simple
           svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-fileassistant
@@ -137,7 +137,12 @@ jobs:
           CONFIG_PACKAGE_luci-app-adguardhome=y
           CONFIG_PACKAGE_luci-app-fileassistant=y
           CONFIG_PACKAGE_luci-app-firewall=y
-          CONFIG_PACKAGE_luci-app-flowoffload=y
+          CONFIG_PACKAGE_luci-app-turboacc=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING is not set
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE is not set
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_CM is not set
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_DRV is not set
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_PDNSD is not set
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-opkg=y
           CONFIG_PACKAGE_luci-app-passwall=y
