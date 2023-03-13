@@ -141,7 +141,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING is not set
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE is not set
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_CM is not set
-          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_DRV is not set
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_PDNSD is not set
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-opkg=y
