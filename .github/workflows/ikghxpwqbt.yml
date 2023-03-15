@@ -82,6 +82,7 @@ jobs:
         run: |
           pushd feeds/luci/applications
           rm -rf luci-app-adguardhome
+          rm -rf luci-app-fileassistant
           rm -rf luci-app-passwall
 
       - name: 安装feeds源
@@ -106,6 +107,13 @@ jobs:
         run: |
           sed -i 's/192.168.9.1/192.168.1.1/g' package/base-files/files/bin/config_generate
           sed -i 's/OpenWrt-Life/OpenWrt/g' package/base-files/files/bin/config_generate
+          sed -i 's/ntp.ntsc.ac.cn/0.openwrt.pool.ntp.org/g' package/base-files/files/bin/config_generate
+          sed -i 's/cn.ntp.org.cn/1.openwrt.pool.ntp.org/g' package/base-files/files/bin/config_generate
+          sed -i 's/ntp.aliyun.com/2.openwrt.pool.ntp.org/g' package/base-files/files/bin/config_generate
+          sed -i 's/edu.ntp.org.cn/3.openwrt.pool.ntp.org/g' package/base-files/files/bin/config_generate
+          sed -i '329,331d' package/base-files/files/bin/config_generate
+          sed -i "s/timezone='.*'/timezone='HKT-8'/g" package/base-files/files/bin/config_generate
+          sed -i "/.*ttylogin='0'.*/i\                                set system.@system[-1].zonename='Asia/Hong Kong'" package/base-files/files/bin/config_generate
           sed -i 's/%D %V %C/OpenWrt 21.02-SNAPSHOT 21.02/g' package/base-files/files/etc/openwrt_release
           sed -i '6,$d' package/base-files/files/etc/banner
           rm -f ./.config*
@@ -166,7 +174,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
+          CONFIG_PACKAGE_luci-app-qbittorrent-simple=y
           CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-sqm=y
 
