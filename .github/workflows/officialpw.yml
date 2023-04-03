@@ -84,7 +84,6 @@ jobs:
           popd
           svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-fileassistant
           svn co https://github.com/Lienol/openwrt-package/branches/other/lean/ipv6-helper
-          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-qbittorrent-simple
           git clone https://github.com/xiaorouji/openwrt-passwall
           git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           pushd luci-app-passwall/luci-app-passwall/root/etc
@@ -151,9 +150,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-          CONFIG_PACKAGE_luci-app-qbittorrent-simple=y
-          CONFIG_PACKAGE_luci-app-qbittorrent-simple_static=y
-          # CONFIG_PACKAGE_luci-app-qbittorrent-simple_dynamic is not set
           CONFIG_PACKAGE_luci-app-sqm=y
 
           # 常用软件包:
