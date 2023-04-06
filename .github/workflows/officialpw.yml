@@ -77,12 +77,11 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/symonlee/luci-app-adguardhome
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf AdGuardHome
           popd
-          svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-fileassistant
+          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
           svn co https://github.com/Lienol/openwrt-package/branches/other/lean/ipv6-helper
           svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-qbittorrent-simple
           git clone https://github.com/xiaorouji/openwrt-passwall
