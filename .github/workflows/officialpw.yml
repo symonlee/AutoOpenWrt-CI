@@ -65,7 +65,6 @@ jobs:
       - name: 删除部分luci文件
         run: |
           pushd feeds/luci/applications
-          rm -rf luci-app-adguardhome
           rm -rf luci-app-pbr
 
       - name: 安装feeds源
