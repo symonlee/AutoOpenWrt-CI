@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: 🏙️ledepw
+name: ikghxpwqbt
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone https://github.com/coolsnowwolf/lede openwrt
+          git clone -b openwrt-21.02 --single-branch https://github.com/ikghx/openwrt-life openwrt
           mv ./openwrt/* ./
 
       - name: 更新feeds源
@@ -54,10 +54,35 @@ jobs:
         run: |
           pushd feeds/packages/net
           rm -rf adguardhome
+          rm -rf brook
+          rm -rf chinadns-ng
+          rm -rf dns2socks
+          rm -rf dns2tcp
           rm -rf dnsproxy
-          rm -rf qBittorrent-static
+          rm -rf hysteria
+          rm -rf ipt2socks
+          rm -rf microsocks
+          rm -rf naiveproxy
+          rm -rf pdnsd-alt
+          rm -rf shadowsocks-rust
+          rm -rf shadowsocksr-libev
+          rm -rf simple-obfs
           rm -rf smartdns
+          rm -rf ssocks
+          rm -rf tcping
+          rm -rf trojan
+          rm -rf trojan-go
+          rm -rf trojan-plus
+          rm -rf v2ray-core
           rm -rf v2ray-geodata
+          rm -rf v2ray-plugin
+          rm -rf xray-core
+          rm -rf xray-plugin
+
+      - name: 删除部分luci文件
+        run: |
+          pushd feeds/luci/applications
+          rm -rf luci-app-passwall
 
       - name: 安装feeds源
         run: |
@@ -72,7 +97,9 @@ jobs:
           pushd xipk
           rm -rf AdGuardHome
           popd
-          svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-fileassistant
+          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
+          svn co https://github.com/Lienol/openwrt-package/branches/other/lean/ipv6-helper
+          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-qbittorrent-simple
           git clone https://github.com/xiaorouji/openwrt-passwall
           git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           pushd luci-app-passwall/luci-app-passwall/root/etc
@@ -80,6 +107,10 @@ jobs:
 
       - name: 载入自定义配置
         run: |
+          sed -i 's/192.168.9.1/192.168.1.1/g' package/base-files/files/bin/config_generate
+          sed -i 's/OpenWrt-Life/OpenWrt/g' package/base-files/files/bin/config_generate
+          sed -i 's/%D %V %C/OpenWrt 21.02-SNAPSHOT 21.02/g' package/base-files/files/etc/openwrt_release
+          sed -i '6,$d' package/base-files/files/etc/banner
           rm -f ./.config*
           touch ./.config
           cat >> .config <<EOF
@@ -103,7 +134,7 @@ jobs:
           CONFIG_PACKAGE_ipv6helper=y
 
           # 文件系统支持:
-          CONFIG_PACKAGE_automount=y
+          CONFIG_PACKAGE_block-mount=y
 
           # 去掉板载无线:
           # CONFIG_PACKAGE_cypress-firmware-43455-sdio is not set
@@ -117,22 +148,15 @@ jobs:
           CONFIG_PACKAGE_kmod-usb2-pci=y
           CONFIG_PACKAGE_kmod-usb3=y
 
+          # 系统中文支持:
+          CONFIG_LUCI_LANG_zh_Hans=y
+
           # 常用LuCI插件选择:
-          # CONFIG_PACKAGE_luci-app-accesscontrol is not set
-          # CONFIG_PACKAGE_luci-app-arpbind is not set
-          # CONFIG_PACKAGE_luci-app-autoreboot is not set
-          # CONFIG_PACKAGE_luci-app-ddns is not set
-          # CONFIG_PACKAGE_luci-app-filetransfer is not set
-          # CONFIG_PACKAGE_luci-app-nlbwmon is not set
-          # CONFIG_PACKAGE_luci-app-turboacc is not set
-          # CONFIG_PACKAGE_luci-app-upnp is not set
-          # CONFIG_PACKAGE_luci-app-vlmcsd is not set
-          # CONFIG_PACKAGE_luci-app-vsftpd is not set
-          # CONFIG_PACKAGE_luci-app-wol is not set
-          CONFIG_PACKAGE_luci-app-cifsd=y
           CONFIG_PACKAGE_luci-app-fileassistant=y
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
+          CONFIG_PACKAGE_luci-app-ksmbd=y
+          CONFIG_PACKAGE_luci-app-opkg=y
           CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
