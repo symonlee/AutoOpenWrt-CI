@@ -82,11 +82,16 @@ jobs:
       - name: 删除部分luci文件
         run: |
           pushd feeds/luci/applications
+          rm -rf luci-app-fileassistant
           rm -rf luci-app-passwall
 
       - name: 安装feeds源
         run: |
           ./scripts/feeds install -a
+
+      - name: zonetime
+        run: |
+          patch -p1 < patches/Patch-RPI-4.patch
 
       - name: 构建自定义文件结构
         run: |
@@ -109,8 +114,6 @@ jobs:
 
       - name: 载入自定义配置
         run: |
-          sed -i 's/192.168.9.1/192.168.1.1/g' package/base-files/files/bin/config_generate
-          sed -i 's/OpenWrt-Life/OpenWrt/g' package/base-files/files/bin/config_generate
           sed -i 's/%D %V %C/OpenWrt 21.02-SNAPSHOT 21.02/g' package/base-files/files/etc/openwrt_release
           sed -i '6,$d' package/base-files/files/etc/banner
           rm -f ./.config*
