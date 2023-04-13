@@ -89,7 +89,7 @@ jobs:
         run: |
           ./scripts/feeds install -a
 
-      - name: zonetime
+      - name: Timezone
         run: |
           patch -p1 < patches/Patch-RPI-4.patch
 
