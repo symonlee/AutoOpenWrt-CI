@@ -1,6 +1,6 @@
-diff -Nur package/base-files/files/bin/config_generate package/base-files/files/bin/config_generate
---- package/base-files/files/bin/config_generate	2023-04-13 12:46:46.672739600 +0800
-+++ package/base-files/files/bin/config_generate	2023-04-13 13:20:46.160223800 +0800
+diff -Nur a/package/base-files/files/bin/config_generate b/package/base-files/files/bin/config_generate
+--- a/package/base-files/files/bin/config_generate	2023-04-13 12:46:46.672739600 +0800
++++ b/package/base-files/files/bin/config_generate	2023-04-13 13:20:46.160223800 +0800
 @@ -162,7 +162,7 @@
  		static)
  			local ipad
