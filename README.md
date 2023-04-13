@@ -9,4 +9,4 @@
 
 ### 1. fork [coolsnowwolf/lede](https://github.com/coolsnowwolf/lede) 或者 [OpenWrt trunk](https://github.com/openwrt/openwrt).
 
-### 2. 上传`openwrt-ci.yml`和`merge-upstream.yml`到`/.github/workflows/`下.
+### 2. 上传`openwrt-ci.yml`到`/.github/workflows/`下.
