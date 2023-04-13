@@ -1,0 +1,45 @@
+diff -Nur a/base-files/files/bin/config_generate b/base-files/files/bin/config_generate
+--- a/base-files/files/bin/config_generate	2023-04-13 12:46:46.672739600 +0800
++++ b/base-files/files/bin/config_generate	2023-04-13 13:20:46.160223800 +0800
+@@ -162,7 +162,7 @@
+ 		static)
+ 			local ipad
+ 			case "$1" in
+-				lan) ipad=${ipaddr:-"192.168.9.1"} ;;
++				lan) ipad=${ipaddr:-"192.168.1.1"} ;;
+ 				*) ipad=${ipaddr:-"192.168.$((addr_offset++)).1"} ;;
+ 			esac
+ 
+@@ -310,9 +310,9 @@
+ 	uci -q batch <<-EOF
+ 		delete system.@system[0]
+ 		add system system
+-		set system.@system[-1].hostname='OpenWrt-Life'
+-		set system.@system[-1].timezone='CST-8'
+-		set system.@system[-1].zonename='Asia/Shanghai'
++		set system.@system[-1].hostname='OpenWrt'
++		set system.@system[-1].timezone='HKT-8'
++		set system.@system[-1].zonename='Asia/Hong Kong'
+ 		set system.@system[-1].ttylogin='0'
+ 		set system.@system[-1].log_size='64'
+ 		set system.@system[-1].urandom_seed='0'
+@@ -322,13 +322,12 @@
+ 
+ 		delete system.ntp
+ 		set system.ntp='timeserver'
+-		add_list system.ntp.server='ntp.ntsc.ac.cn'
+-		add_list system.ntp.server='cn.ntp.org.cn'
+-		add_list system.ntp.server='ntp.aliyun.com'
+-		add_list system.ntp.server='edu.ntp.org.cn'
+-		add_list system.ntp.server='time.windows.com'
+-		add_list system.ntp.server='time.nist.gov'
+-		add_list system.ntp.server='time.apple.com'
++		set system.ntp.enabled='1'
++		set system.ntp.enable_server='0'
++		add_list system.ntp.server='0.openwrt.pool.ntp.org'
++		add_list system.ntp.server='1.openwrt.pool.ntp.org'
++		add_list system.ntp.server='2.openwrt.pool.ntp.org'
++		add_list system.ntp.server='3.openwrt.pool.ntp.org'
+ 	EOF
+ 
+ 	if json_is_a system object; then
