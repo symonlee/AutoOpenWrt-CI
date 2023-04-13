@@ -1,6 +1,6 @@
 diff -Nur a/package/base-files/files/bin/config_generate b/package/base-files/files/bin/config_generate
 --- a/package/base-files/files/bin/config_generate	2023-04-13 12:46:46.672739600 +0800
-+++ b/package/base-files/files/bin/config_generate	2023-04-13 13:20:46.160223800 +0800
++++ b/package/base-files/files/bin/config_generate	2023-04-13 17:24:23.683587600 +0800
 @@ -162,7 +162,7 @@
  		static)
  			local ipad
@@ -10,7 +10,7 @@ diff -Nur a/package/base-files/files/bin/config_generate b/package/base-files/fi
  				*) ipad=${ipaddr:-"192.168.$((addr_offset++)).1"} ;;
  			esac
  
-@@ -310,9 +310,9 @@
+@@ -310,25 +310,19 @@
  	uci -q batch <<-EOF
  		delete system.@system[0]
  		add system system
@@ -23,7 +23,9 @@ diff -Nur a/package/base-files/files/bin/config_generate b/package/base-files/fi
  		set system.@system[-1].ttylogin='0'
  		set system.@system[-1].log_size='64'
  		set system.@system[-1].urandom_seed='0'
-@@ -322,13 +322,12 @@
+-		set system.@system[-1].log_proto='udp'
+-		set system.@system[-1].conloglevel='8'
+-		set system.@system[-1].cronloglevel='5'
  
  		delete system.ntp
  		set system.ntp='timeserver'
@@ -36,10 +38,8 @@ diff -Nur a/package/base-files/files/bin/config_generate b/package/base-files/fi
 -		add_list system.ntp.server='time.apple.com'
 +		set system.ntp.enabled='1'
 +		set system.ntp.enable_server='0'
-+		add_list system.ntp.server='0.openwrt.pool.ntp.org'
-+		add_list system.ntp.server='1.openwrt.pool.ntp.org'
-+		add_list system.ntp.server='2.openwrt.pool.ntp.org'
-+		add_list system.ntp.server='3.openwrt.pool.ntp.org'
++		add_list system.ntp.server='ntp1.aliyun.com'
++		add_list system.ntp.server='time2.cloud.tencent.com'
  	EOF
  
  	if json_is_a system object; then
