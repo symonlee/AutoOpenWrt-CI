@@ -112,7 +112,7 @@ jobs:
 
       - name: 载入自定义配置
         run: |
-          sed -i 's/%D %V/OpenWrt 21.02-SNAPSHOT/g' package/base-files/files/etc/openwrt_release
+          sed -i 's/%D %V %C/OpenWrt 21.02-SNAPSHOT 21.02/g' package/base-files/files/etc/openwrt_release
           sed -i '6,$d' package/base-files/files/etc/banner
           rm -f ./.config*
           touch ./.config
