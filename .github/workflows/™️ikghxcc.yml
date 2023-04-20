@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: ikghxpwqbt
+name: ™️ikghxcc
 
 on:
   push:
@@ -45,6 +45,9 @@ jobs:
         run: |
           git clone -b openwrt-21.02 --single-branch https://github.com/ikghx/openwrt-life openwrt
           mv ./openwrt/* ./
+
+      - name: Cache toolchain
+        uses: HiGarfield/cachewrtbuild@main
 
       - name: 更新feeds源
         run: |
@@ -190,7 +193,7 @@ jobs:
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
-          make defconfig
+          echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config; make defconfig
 
       - name: 下载软件包
         run: make download -j16
