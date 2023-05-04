@@ -117,6 +117,7 @@ jobs:
         run: |
           sed -i 's/%D %V %C/OpenWrt 21.02-SNAPSHOT 21.02/g' package/base-files/files/etc/openwrt_release
           sed -i '6,$d' package/base-files/files/etc/banner
+          sed -i 's/+chinadns-ng +dns2socks/+dns2socks/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/Makefile
           rm -f ./.config*
           touch ./.config
           cat >> .config <<EOF
