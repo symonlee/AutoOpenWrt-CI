@@ -63,6 +63,7 @@ jobs:
           rm -rf dns2tcp
           rm -rf dnsproxy
           rm -rf hysteria
+          rm -rf ipt2socks
           rm -rf microsocks
           rm -rf naiveproxy
           rm -rf pdnsd-alt
