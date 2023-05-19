@@ -1,3 +1,21 @@
+diff -Nur a/package/base-files/files/etc/banner b/package/base-files/files/etc/banner
+--- a/package/base-files/files/etc/banner	2023-05-19 15:50:21.250446200 +0800
++++ b/package/base-files/files/etc/banner	2023-05-19 21:02:40.501157300 +0800
+@@ -1,9 +1,5 @@
+-.___                               __         .__
+-|   | _____   _____   ____________/  |______  |  |
+-|   |/     \ /     \ /  _ \_  __ \   __\__  \ |  |
+-|   |  Y Y  \  Y Y  (  <_> )  | \/|  |  / __ \|  |__
+-|___|__|_|  /__|_|  /\____/|__|   |__| (____  /____/
+-          \/      \/  BE FREE AND UNAFRAID  \/
+- -----------------------------------------------------
+- %D %V, %C
+- -----------------------------------------------------
++  _______                     ________        __
++ |       |.-----.-----.-----.|  |  |  |.----.|  |_
++ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
++ |_______||   __|_____|__|__||________||__|  |____|
++          |__| W I R E L E S S   F R E E D O M
 diff -Nur a/package/emortal/default-settings/files/99-default-settings-chinese b/package/emortal/default-settings/files/99-default-settings-chinese
 --- a/package/emortal/default-settings/files/99-default-settings-chinese	2023-05-19 15:50:22.230697600 +0800
 +++ b/package/emortal/default-settings/files/99-default-settings-chinese	2023-05-19 17:14:11.970037600 +0800
