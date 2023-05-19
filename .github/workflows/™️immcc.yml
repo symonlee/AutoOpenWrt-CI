@@ -48,8 +48,6 @@ jobs:
 
       - name: Cache toolchain
         uses: HiGarfield/cachewrtbuild@main
-        with:
-          ccache: 'true'
 
       - name: 更新feeds源
         run: |
