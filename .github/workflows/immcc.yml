@@ -106,7 +106,7 @@ jobs:
           pushd xipk
           rm -rf AdGuardHome
           popd
-          svn co https://github.com/Lienol/openwrt-package/branches/other/lean/ipv6-helper
+          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-qbittorrent-simple
           git clone https://github.com/xiaorouji/openwrt-passwall
           git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           pushd luci-app-passwall/luci-app-passwall/root/etc
@@ -154,7 +154,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-fileassistant=y
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
-          CONFIG_PACKAGE_luci-app-ksmbd=y
           CONFIG_PACKAGE_luci-app-opkg=y
           CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
@@ -167,7 +166,10 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
+          CONFIG_PACKAGE_luci-app-qbittorrent-simple=y
+          CONFIG_PACKAGE_luci-app-qbittorrent-simple_static=y
+          # CONFIG_PACKAGE_luci-app-qbittorrent-simple_dynamic is not set
+          CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-sqm=y
           # CONFIG_PACKAGE_luci-app-turboacc is not set
           # CONFIG_PACKAGE_TURBOACC_INCLUDE_NO_FASTPATH is not set
@@ -175,7 +177,6 @@ jobs:
           # CONFIG_PACKAGE_TURBOACC_INCLUDE_FAST_CLASSIFIER is not set
           # CONFIG_PACKAGE_TURBOACC_INCLUDE_SHORTCUT_FE_CM is not set
           # CONFIG_PACKAGE_TURBOACC_INCLUDE_BBR_CCA is not set
-          CONFIG_PACKAGE_luci-app-transmission=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
