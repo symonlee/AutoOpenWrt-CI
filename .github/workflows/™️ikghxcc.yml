@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: ™️immcc
+name: ™️ikghxcc
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-21.02 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
+          git clone -b openwrt-21.02 --single-branch https://github.com/ikghx/openwrt-life openwrt
           mv ./openwrt/* ./
 
       - name: Cache toolchain
@@ -85,6 +85,7 @@ jobs:
       - name: 删除部分luci文件
         run: |
           pushd feeds/luci/applications
+          rm -rf luci-app-fileassistant
           rm -rf luci-app-passwall
 
       - name: 安装feeds源
@@ -93,7 +94,7 @@ jobs:
 
       - name: Timezone patch
         run: |
-          patch -p1 < patches/Patch-Imm-RPI-4.patch
+          patch -p1 < patches/Patch-RPI-4.patch
 
       - name: 构建自定义文件结构
         run: |
@@ -104,6 +105,8 @@ jobs:
           pushd xipk
           rm -rf AdGuardHome
           popd
+          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
+          svn co https://github.com/Lienol/openwrt-package/branches/other/lean/ipv6-helper
           svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-qbittorrent-simple
           git clone https://github.com/xiaorouji/openwrt-passwall
           git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
@@ -112,8 +115,8 @@ jobs:
 
       - name: 载入自定义配置
         run: |
-          sed -i 's/ImmortalWrt/OpenWrt/g' package/base-files/files/bin/config_generate
           sed -i 's/%D %V %C/OpenWrt 21.02-SNAPSHOT 21.02/g' package/base-files/files/etc/openwrt_release
+          sed -i '6,$d' package/base-files/files/etc/banner
           sed -i 's/+chinadns-ng +dns2socks/+dns2socks/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/Makefile
           rm -f ./.config*
           touch ./.config
@@ -135,6 +138,10 @@ jobs:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
           CONFIG_PACKAGE_ip6tables-mod-nat=y
+          CONFIG_PACKAGE_ipv6helper=y
+
+          # 文件系统支持:
+          CONFIG_PACKAGE_block-mount=y
 
           # 去掉板载无线:
           # CONFIG_PACKAGE_cypress-firmware-43455-sdio is not set
@@ -148,9 +155,10 @@ jobs:
           CONFIG_PACKAGE_kmod-usb2-pci=y
           CONFIG_PACKAGE_kmod-usb3=y
 
+          # 系统中文支持:
+          CONFIG_LUCI_LANG_zh_Hans=y
+
           # 常用LuCI插件选择:
-          # CONFIG_PACKAGE_luci-app-cpufreq is not set
-          # CONFIG_PACKAGE_luci-app-filetransfer is not set
           CONFIG_PACKAGE_luci-app-fileassistant=y
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
@@ -166,17 +174,9 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-          CONFIG_PACKAGE_luci-app-qbittorrent-simple=y
-          CONFIG_PACKAGE_luci-app-qbittorrent-simple_static=y
-          # CONFIG_PACKAGE_luci-app-qbittorrent-simple_dynamic is not set
+          CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-sqm=y
-          # CONFIG_PACKAGE_luci-app-turboacc is not set
-          # CONFIG_PACKAGE_TURBOACC_INCLUDE_NO_FASTPATH is not set
-          CONFIG_PACKAGE_TURBOACC_INCLUDE_FLOW_OFFLOADING=y
-          # CONFIG_PACKAGE_TURBOACC_INCLUDE_FAST_CLASSIFIER is not set
-          # CONFIG_PACKAGE_TURBOACC_INCLUDE_SHORTCUT_FE_CM is not set
-          # CONFIG_PACKAGE_TURBOACC_INCLUDE_BBR_CCA is not set
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
