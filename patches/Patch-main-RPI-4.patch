@@ -1,7 +1,17 @@
 diff -Nur a/package/base-files/files/bin/config_generate b/package/base-files/files/bin/config_generate
 --- a/package/base-files/files/bin/config_generate	2023-05-24 12:37:49.882932000 +0800
-+++ b/package/base-files/files/bin/config_generate	2023-05-24 12:41:46.413497100 +0800
-@@ -321,10 +321,8 @@
++++ b/package/base-files/files/bin/config_generate	2023-05-24 17:17:31.959315300 +0800
+@@ -312,7 +312,8 @@
+ 		delete system.@system[0]
+ 		add system system
+ 		set system.@system[-1].hostname='OpenWrt'
+-		set system.@system[-1].timezone='UTC'
++		set system.@system[-1].timezone='HKT-8'
++		set system.@system[-1].zonename='Asia/Hong Kong'
+ 		set system.@system[-1].ttylogin='0'
+ 		set system.@system[-1].log_size='64'
+ 		set system.@system[-1].urandom_seed='0'
+@@ -321,10 +322,8 @@
  		set system.ntp='timeserver'
  		set system.ntp.enabled='1'
  		set system.ntp.enable_server='0'
