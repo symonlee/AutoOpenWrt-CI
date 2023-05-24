@@ -14,6 +14,17 @@ diff -Nur a/include/target.mk b/include/target.mk
  	odhcp6c \
  	odhcpd-ipv6only \
  	ppp \
+diff -Nur a/package/network/config/firewall/files/firewall.config b/package/network/config/firewall/files/firewall.config
+--- a/package/network/config/firewall/files/firewall.config	2023-05-25 00:17:17.059277100 +0800
++++ b/package/network/config/firewall/files/firewall.config	2023-05-25 00:16:03.965402100 +0800
+@@ -1,6 +1,6 @@
+ config defaults
+ 	option syn_flood	1
+-	option input		REJECT
++	option input		ACCEPT
+ 	option output		ACCEPT
+ 	option forward		REJECT
+ # Uncomment this line to disable ipv6 rules
 diff -Nur a/package/network/utils/iptables/Makefile b/package/network/utils/iptables/Makefile
 --- a/package/network/utils/iptables/Makefile	2023-05-24 22:58:06.069807300 +0800
 +++ b/package/network/utils/iptables/Makefile	2023-05-24 23:18:43.319288800 +0800
