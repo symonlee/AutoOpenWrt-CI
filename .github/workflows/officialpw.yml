@@ -78,10 +78,6 @@ jobs:
         run: |
           patch -p1 < patches/Patch-main-RPI-4.patch
 
-      - name: Firewall patch
-        run: |
-          patch -p1 < patches/Patch-FirewallRPI-4.patch
-
       - name: 构建自定义文件结构
         run: |
           cd package
