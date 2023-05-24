@@ -1,0 +1,41 @@
+diff -Nur a/include/target.mk b/include/target.mk
+--- a/include/target.mk	2023-05-24 22:58:48.882314700 +0800
++++ b/include/target.mk	2023-05-24 23:11:22.528070600 +0800
+@@ -54,9 +54,9 @@
+ # For router targets
+ DEFAULT_PACKAGES.router:=\
+ 	dnsmasq \
+-	firewall4 \
+-	nftables \
+-	kmod-nft-offload \
++	firewall \
++	ip6tables \
++	iptables \
+ 	odhcp6c \
+ 	odhcpd-ipv6only \
+ 	ppp \
+diff -Nur a/package/network/utils/iptables/Makefile b/package/network/utils/iptables/Makefile
+--- a/package/network/utils/iptables/Makefile	2023-05-24 22:58:06.069807300 +0800
++++ b/package/network/utils/iptables/Makefile	2023-05-24 23:18:43.319288800 +0800
+@@ -135,10 +135,6 @@
+   TITLE:=IP firewall administration tool nft
+   DEPENDS:=+kmod-ipt-core +xtables-nft
+   PROVIDES:=iptables
+-  ALTERNATIVES:=\
+-    300:/usr/sbin/iptables:/usr/sbin/xtables-nft-multi \
+-    300:/usr/sbin/iptables-restore:/usr/sbin/xtables-nft-multi \
+-    300:/usr/sbin/iptables-save:/usr/sbin/xtables-nft-multi
+ endef
+ 
+ define Package/iptables-nft/description
+@@ -488,10 +484,6 @@
+   DEPENDS:=@IPV6 +kmod-ip6tables +xtables-nft
+   TITLE:=IP firewall administration tool nft
+   PROVIDES:=ip6tables
+-  ALTERNATIVES:=\
+-    300:/usr/sbin/ip6tables:/usr/sbin/xtables-nft-multi \
+-    300:/usr/sbin/ip6tables-restore:/usr/sbin/xtables-nft-multi \
+-    300:/usr/sbin/ip6tables-save:/usr/sbin/xtables-nft-multi
+ endef
+ 
+ define Package/ip6tables-nft/description
