@@ -78,6 +78,10 @@ jobs:
         run: |
           patch -p1 < patches/Patch-main-RPI-4.patch
 
+      - name: Firewall patch
+        run: |
+          patch -p1 < patches/Patch-FirewallRPI-4.patch
+
       - name: 构建自定义文件结构
         run: |
           cd package
@@ -117,6 +121,8 @@ jobs:
           # IPv6支持:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
+          CONFIG_PACKAGE_dnsmasq_full_ipset=y
+          # CONFIG_PACKAGE_dnsmasq_full_nftset is not set
           CONFIG_PACKAGE_ip6tables-mod-nat=y
           CONFIG_PACKAGE_ipv6helper=y
 
