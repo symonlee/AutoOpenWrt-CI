@@ -123,6 +123,7 @@ jobs:
           CONFIG_PACKAGE_dnsmasq-full=y
           CONFIG_PACKAGE_dnsmasq_full_ipset=y
           # CONFIG_PACKAGE_dnsmasq_full_nftset is not set
+          CONFIG_PACKAGE_ip6tables-zz-legacy=y
           CONFIG_PACKAGE_ip6tables-mod-nat=y
           CONFIG_PACKAGE_ipv6helper=y
 
