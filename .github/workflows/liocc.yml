@@ -83,6 +83,8 @@ jobs:
           rm -rf v2ray-plugin
           rm -rf xray-core
           rm -rf xray-plugin
+          rm -rf samba4
+          svn co https://github.com/openwrt/packages/branches/openwrt-21.02/net/samba4
 
       - name: 删除部分luci文件
         run: |
