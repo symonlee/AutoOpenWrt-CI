@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: ™iofficialpw
+name: ™mainpw
 
 on:
   push:
