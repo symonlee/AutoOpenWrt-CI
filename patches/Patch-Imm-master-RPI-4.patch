@@ -1,0 +1,21 @@
+diff -Nur a/package/emortal/default-settings/files/99-default-settings-chinese b/package/emortal/default-settings/files/99-default-settings-chinese
+--- a/package/emortal/default-settings/files/99-default-settings-chinese	2023-05-27 13:11:45.230686600 +0800
++++ b/package/emortal/default-settings/files/99-default-settings-chinese	2023-05-27 13:14:25.216666000 +0800
+@@ -1,14 +1,12 @@
+ #!/bin/sh
+ 
+ uci -q batch <<-EOF
+-	set system.@system[0].timezone='CST-8'
+-	set system.@system[0].zonename='Asia/Shanghai'
++	set system.@system[0].timezone='HKT-8'
++	set system.@system[0].zonename='Asia/Hong Kong'
+ 
+ 	delete system.ntp.server
+-	add_list system.ntp.server='ntp.tencent.com'
+ 	add_list system.ntp.server='ntp1.aliyun.com'
+-	add_list system.ntp.server='ntp.ntsc.ac.cn'
+-	add_list system.ntp.server='cn.ntp.org.cn'
++	add_list system.ntp.server='time2.cloud.tencent.com'
+ EOF
+ uci commit system
+ 
