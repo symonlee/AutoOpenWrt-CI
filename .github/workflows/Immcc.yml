@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: ™mainpw
+name: Immcc
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b main --single-branch https://github.com/openwrt/openwrt
+          git clone -b master --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
 
       - name: Cache toolchain
@@ -57,18 +57,35 @@ jobs:
         run: |
           pushd feeds/packages/net
           rm -rf adguardhome
+          rm -rf brook
+          rm -rf chinadns-ng
+          rm -rf dns2socks
+          rm -rf dns2tcp
           rm -rf dnsproxy
+          rm -rf hysteria
+          rm -rf ipt2socks
           rm -rf microsocks
+          rm -rf naiveproxy
+          rm -rf pdnsd-alt
+          rm -rf shadowsocks-rust
+          rm -rf shadowsocksr-libev
+          rm -rf simple-obfs
           rm -rf smartdns
+          rm -rf ssocks
+          rm -rf tcping
+          rm -rf trojan
           rm -rf trojan-go
+          rm -rf trojan-plus
           rm -rf v2ray-core
           rm -rf v2ray-geodata
+          rm -rf v2ray-plugin
           rm -rf xray-core
+          rm -rf xray-plugin
 
       - name: 删除部分luci文件
         run: |
           pushd feeds/luci/applications
-          rm -rf luci-app-pbr
+          rm -rf luci-app-passwall
 
       - name: 安装feeds源
         run: |
@@ -76,11 +93,7 @@ jobs:
 
       - name: Timezone patch
         run: |
-          patch -p1 < patches/Patch-main-RPI-4.patch
-
-      - name: Firewall patch
-        run: |
-          patch -p1 < patches/Patch-FirewallRPI-4.patch
+          patch -p1 < patches/Patch-Imm-master-RPI-4.patch
 
       - name: 构建自定义文件结构
         run: |
@@ -91,8 +104,6 @@ jobs:
           pushd xipk
           rm -rf AdGuardHome
           popd
-          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
-          svn co https://github.com/Lienol/openwrt-package/branches/other/lean/ipv6-helper
           svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-qbittorrent-simple
           git clone https://github.com/xiaorouji/openwrt-passwall
           git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
@@ -121,14 +132,6 @@ jobs:
           # IPv6支持:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
-          CONFIG_PACKAGE_dnsmasq_full_ipset=y
-          # CONFIG_PACKAGE_dnsmasq_full_nftset is not set
-          CONFIG_PACKAGE_ip6tables-zz-legacy=y
-          CONFIG_PACKAGE_ip6tables-mod-nat=y
-          CONFIG_PACKAGE_ipv6helper=y
-
-          # 文件系统支持:
-          CONFIG_PACKAGE_block-mount=y
 
           # 去掉板载无线:
           # CONFIG_PACKAGE_cypress-firmware-43455-sdio is not set
@@ -142,10 +145,8 @@ jobs:
           CONFIG_PACKAGE_kmod-usb2-pci=y
           CONFIG_PACKAGE_kmod-usb3=y
 
-          # 系统中文支持:
-          CONFIG_LUCI_LANG_zh_Hans=y
-
           # 常用LuCI插件选择:
+          # CONFIG_PACKAGE_luci-app-cpufreq is not set
           CONFIG_PACKAGE_luci-app-fileassistant=y
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
