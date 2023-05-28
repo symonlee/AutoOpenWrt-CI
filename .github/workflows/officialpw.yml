@@ -43,7 +43,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b main --single-branch https://github.com/openwrt/openwrt
+          git clone -b openwrt-21.02 --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
       - name: Cache toolchain
@@ -76,7 +76,7 @@ jobs:
 
       - name: Timezone patch
         run: |
-          patch -p1 < patches/Patch-main-RPI-4.patch
+          patch -p1 < patches/Patch-2102RPI-4.patch
 
       - name: 构建自定义文件结构
         run: |
@@ -88,7 +88,7 @@ jobs:
           rm -rf AdGuardHome
           popd
           svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
-          svn co https://github.com/immortalwrt/immortalwrt/trunk/package/emortal/ipv6-helper
+          svn co https://github.com/Lienol/openwrt-package/branches/other/lean/ipv6-helper
           svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-qbittorrent-simple
           git clone https://github.com/xiaorouji/openwrt-passwall
           git clone -b luci --single-branch https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
