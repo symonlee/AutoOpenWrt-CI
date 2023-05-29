@@ -1,6 +1,6 @@
-diff -Nur a/base-files/files/bin/config_generate b/base-files/files/bin/config_generate
---- a/base-files/files/bin/config_generate	2023-05-29 23:12:17.752212800 +0800
-+++ b/base-files/files/bin/config_generate	2023-05-29 23:38:05.013267700 +0800
+diff -Nur a/package/base-files/files/bin/config_generate b/package/base-files/files/bin/config_generate
+--- a/package/base-files/files/bin/config_generate	2023-05-29 23:12:17.752212800 +0800
++++ b/package/base-files/files/bin/config_generate	2023-05-29 23:38:05.013267700 +0800
 @@ -321,10 +321,8 @@
  		set system.ntp='timeserver'
  		set system.ntp.enabled='1'
@@ -14,9 +14,9 @@ diff -Nur a/base-files/files/bin/config_generate b/base-files/files/bin/config_g
  	EOF
  
  	if json_is_a system object; then
-diff -Nur a/default-settings/files/zzz-default-settings b/default-settings/files/zzz-default-settings
---- a/default-settings/files/zzz-default-settings	2023-05-29 23:12:30.760370100 +0800
-+++ b/default-settings/files/zzz-default-settings	2023-05-29 23:54:48.911247700 +0800
+diff -Nur a/package/default-settings/files/zzz-default-settings b/package/default-settings/files/zzz-default-settings
+--- a/package/default-settings/files/zzz-default-settings	2023-05-29 23:12:30.760370100 +0800
++++ b/package/default-settings/files/zzz-default-settings	2023-05-30 00:29:18.945568700 +0800
 @@ -7,8 +7,8 @@
  #uci set luci.main.mediaurlbase=/luci-static/bootstrap_mod
  uci commit luci
