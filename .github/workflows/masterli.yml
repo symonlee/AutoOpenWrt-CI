@@ -57,7 +57,7 @@ jobs:
 
       - name: 删除部分packages文件
         run: |
-          pushd feeds/openwrt-packages/net
+          pushd feeds/packages/net
           rm -rf adguardhome
           rm -rf brook
           rm -rf chinadns-ng
