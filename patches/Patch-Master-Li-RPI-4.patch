@@ -16,7 +16,7 @@ diff -Nur a/base-files/files/bin/config_generate b/base-files/files/bin/config_g
  	if json_is_a system object; then
 diff -Nur a/default-settings/files/zzz-default-settings b/default-settings/files/zzz-default-settings
 --- a/default-settings/files/zzz-default-settings	2023-05-29 23:12:30.760370100 +0800
-+++ b/default-settings/files/zzz-default-settings	2023-05-29 23:46:42.548382200 +0800
++++ b/default-settings/files/zzz-default-settings	2023-05-29 23:54:48.911247700 +0800
 @@ -7,8 +7,8 @@
  #uci set luci.main.mediaurlbase=/luci-static/bootstrap_mod
  uci commit luci
@@ -28,7 +28,18 @@ diff -Nur a/default-settings/files/zzz-default-settings b/default-settings/files
  uci commit system
  
  uci set fstab.@global[0].anon_mount=1
-@@ -58,7 +58,6 @@
+@@ -37,10 +37,6 @@
+ uci set network.lan.ip6assign='64'
+ uci commit network
+ 
+-sed -i '/option disabled/d' /etc/config/wireless
+-sed -i '/set wireless.radio${devidx}.disabled/d' /lib/wifi/mac80211.sh
+-wifi up
+-
+ sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
+ echo "DISTRIB_DESCRIPTION='OpenWrt SNAPSHOT'" >> /etc/openwrt_release
+ 
+@@ -58,7 +54,6 @@
  /etc/init.d/softethervpnbridge disable 2>/dev/null
  /etc/init.d/softethervpnserver disable 2>/dev/null
  /etc/init.d/softethervpnclient disable 2>/dev/null
