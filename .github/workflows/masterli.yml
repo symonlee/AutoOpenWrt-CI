@@ -92,6 +92,8 @@ jobs:
       - name: 删除部分other文件
         run: |
           pushd feeds/other/lean
+          rm -rf automount
+          rm -rf autosamba
           rm -rf ipv6-helper
           rm -rf qBittorrent-static
 
