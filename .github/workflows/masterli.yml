@@ -43,7 +43,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b master --single-branch https://github.com/Lienol/openwrt
+          git clone -b 23.05 --single-branch https://github.com/Lienol/openwrt
           mv ./openwrt/* ./
 
       - name: Cache toolchain
