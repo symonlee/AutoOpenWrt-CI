@@ -97,6 +97,7 @@ jobs:
 
       - name: 载入自定义配置
         run: |
+          sed -i 's/+chinadns-ng +dns2socks/+dns2socks/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/Makefile
           rm -f ./.config*
           touch ./.config
           cat >> .config <<EOF
