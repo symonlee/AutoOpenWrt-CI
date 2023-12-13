@@ -161,7 +161,6 @@ jobs:
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
           CONFIG_PACKAGE_dnsproxy=y
-          CONFIG_PACKAGE_qBittorrent-static=y
           CONFIG_PACKAGE_luci-compat=y
           CONFIG_PACKAGE_luci-lib-ipkg=y
           CONFIG_PACKAGE_fdisk=y
