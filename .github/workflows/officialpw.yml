@@ -89,6 +89,7 @@ jobs:
           popd
           svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
           svn co https://github.com/immortalwrt/immortalwrt/trunk/package/emortal/ipv6-helper
+          git clone https://github.com/sbwml/openwrt-qBittorrent
           git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           git clone https://github.com/xiaorouji/openwrt-passwall-packages
           pushd luci-app-passwall/luci-app-passwall/root/etc
@@ -152,6 +153,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray is not set
+          CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-sqm=y
           CONFIG_PACKAGE_luci-app-ttyd=y
