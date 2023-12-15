@@ -89,7 +89,6 @@ jobs:
           popd
           svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
           svn co https://github.com/immortalwrt/immortalwrt/trunk/package/emortal/ipv6-helper
-          svn co https://github.com/wangzan200808/bypackages/trunk/luci-app-qbittorrent-simple
           git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           git clone https://github.com/xiaorouji/openwrt-passwall-packages
           pushd luci-app-passwall/luci-app-passwall/root/etc
