@@ -87,7 +87,11 @@ jobs:
           pushd xipk
           rm -rf AdGuardHome
           popd
-          git clone https://github.com/kiddin9/openwrt-packages.git --depth=1 --branch=master --single-branch luci-app-fileassistant
+          git clone https://github.com/kiddin9/openwrt-packages
+          cd openwrt-packages
+          git filter-repo --subdirectory-filter luci-app-fileassistant
+          git filter-repo --path-rename luci-app-fileassistant/:
+          cd
           git clone https://github.com/immortalwrt/immortalwrt.git --depth=1 --branch=master --single-branch package/emortal/ipv6-helper
           git clone https://github.com/sbwml/openwrt-qBittorrent
           git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
