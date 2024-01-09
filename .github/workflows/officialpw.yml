@@ -87,8 +87,8 @@ jobs:
           pushd xipk
           rm -rf AdGuardHome
           popd
-          svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-fileassistant
-          svn co https://github.com/immortalwrt/immortalwrt/trunk/package/emortal/ipv6-helper
+          git clone https://github.com/kiddin9/openwrt-packages.git --depth=1 --branch=master --single-branch luci-app-fileassistant
+          git clone https://github.com/immortalwrt/immortalwrt.git --depth=1 --branch=master --single-branch package/emortal/ipv6-helper
           git clone https://github.com/sbwml/openwrt-qBittorrent
           git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           git clone https://github.com/xiaorouji/openwrt-passwall-packages
