@@ -59,6 +59,7 @@ jobs:
           rm -rf adguardhome
           rm -rf dnsproxy
           rm -rf microsocks
+          rm -rf sing-box
           rm -rf smartdns
           rm -rf trojan-go
           rm -rf v2ray-core
@@ -149,10 +150,10 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Server is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_SingBox is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray is not set
           CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-qbittorrent_static=y
           # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
