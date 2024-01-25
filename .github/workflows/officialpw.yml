@@ -23,7 +23,7 @@ jobs:
 
     name: 树莓派4B
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: 校验本地文件
@@ -110,8 +110,9 @@ jobs:
           CONFIG_TARGET_bcm27xx_bcm2711_DEVICE_rpi-4=y
 
           # 编译ext4固件:
-          CONFIG_TARGET_ROOTFS_EXT4FS=y
-          # CONFIG_TARGET_ROOTFS_SQUASHFS is not set
+          # CONFIG_TARGET_ROOTFS_EXT4FS is not set
+          CONFIG_TARGET_ROOTFS_SQUASHFS=y
+          CONFIG_TARGET_SQUASHFS_BLOCK_SIZE=64
 
           # 设置固件大小:
           CONFIG_TARGET_ROOTFS_PARTSIZE=1984
