@@ -46,9 +46,6 @@ jobs:
           git clone -b main --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
-      - name: Cache toolchain
-        uses: HiGarfield/cachewrtbuild@main
-
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
