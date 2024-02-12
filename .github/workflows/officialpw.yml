@@ -57,7 +57,6 @@ jobs:
           rm -rf dnsproxy
           rm -rf microsocks
           rm -rf sing-box
-          rm -rf smartdns
           rm -rf trojan-go
           rm -rf v2ray-core
           rm -rf v2ray-geodata
@@ -67,6 +66,7 @@ jobs:
         run: |
           pushd feeds/luci/applications
           rm -rf luci-app-pbr
+          rm -rf luci-app-smartdns
 
       - name: 安装feeds源
         run: |
@@ -81,6 +81,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
+          git clone https://github.com/pymumu/luci-app-smartdns
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf AdGuardHome
