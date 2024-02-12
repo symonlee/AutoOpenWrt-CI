@@ -57,6 +57,7 @@ jobs:
           rm -rf dnsproxy
           rm -rf microsocks
           rm -rf sing-box
+          rm -rf smartdns
           rm -rf trojan-go
           rm -rf v2ray-core
           rm -rf v2ray-geodata
@@ -66,7 +67,6 @@ jobs:
         run: |
           pushd feeds/luci/applications
           rm -rf luci-app-pbr
-          rm -rf luci-app-smartdns
 
       - name: 安装feeds源
         run: |
@@ -81,7 +81,6 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/pymumu/luci-app-smartdns
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf AdGuardHome
@@ -157,15 +156,14 @@ jobs:
           CONFIG_PACKAGE_luci-app-qbittorrent_static=y
           # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
           CONFIG_PACKAGE_luci-app-samba4=y
-          CONFIG_PACKAGE_luci-app-smartdns=y
           CONFIG_PACKAGE_luci-app-sqm=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
           CONFIG_PACKAGE_AdGuardHome=y
+          CONFIG_PACKAGE_smartdns=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
-          CONFIG_PACKAGE_dnsproxy=y
           CONFIG_PACKAGE_luci-compat=y
           CONFIG_PACKAGE_luci-lib-ipkg=y
           CONFIG_PACKAGE_fdisk=y
