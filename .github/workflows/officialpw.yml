@@ -180,9 +180,6 @@ jobs:
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
 
-      - name: 下载软件包
-        run: make download -j16
-
       - name: 进行固件编译
         run: |
           make -j$(nproc) || make -j1 V=s
