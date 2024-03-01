@@ -174,7 +174,6 @@ jobs:
           CONFIG_PACKAGE_luci=y
           CONFIG_PACKAGE_luci-theme-bootstrap=y
           # CONFIG_PACKAGE_wpad-basic-wolfssl is not set
-          # CONFIG_XRAY_CORE_COMPRESS_UPX is not set
           
           EOF
 
