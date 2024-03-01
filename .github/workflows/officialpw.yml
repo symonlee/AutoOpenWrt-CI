@@ -99,6 +99,7 @@ jobs:
 
       - name: 载入自定义配置
         run: |
+          sed -i '92,104d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i 's/+chinadns-ng +dns2socks/+dns2socks/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/Makefile
           rm -f ./.config*
           touch ./.config
@@ -151,9 +152,11 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Server is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs is not set
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_SingBox=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray is not set
           CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-qbittorrent_static=y
           # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
