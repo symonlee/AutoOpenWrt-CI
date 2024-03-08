@@ -61,6 +61,7 @@ jobs:
           rm -rf microsocks
           rm -rf sing-box
           rm -rf smartdns
+          rm -rf sqm-scripts
           rm -rf trojan-go
           rm -rf v2ray-core
           rm -rf v2ray-geodata
