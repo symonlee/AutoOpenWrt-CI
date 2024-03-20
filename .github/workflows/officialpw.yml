@@ -71,6 +71,7 @@ jobs:
         run: |
           pushd feeds/luci/applications
           rm -rf luci-app-pbr
+          rm -rf luci-app-transmission
 
       - name: 安装feeds源
         run: |
@@ -158,10 +159,8 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray is not set
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
-          CONFIG_PACKAGE_luci-app-qbittorrent_static=y
-          # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
           CONFIG_PACKAGE_luci-app-sqm=y
+          CONFIG_PACKAGE_luci-app-transmission=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
