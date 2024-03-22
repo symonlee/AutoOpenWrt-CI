@@ -126,7 +126,7 @@ jobs:
           CONFIG_PACKAGE_ip6tables-nft=y
 
           # 文件系统支持:
-          CONFIG_PACKAGE_block-mount=y
+          CONFIG_PACKAGE_blockd=y
 
           # 去掉板载无线:
           # CONFIG_PACKAGE_brcmfmac-nvram-43455-sdio is not set
