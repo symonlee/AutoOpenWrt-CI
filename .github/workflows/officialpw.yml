@@ -46,7 +46,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone https://github.com/symonlee/openwrt
+          git clone -b main --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
       - name: 更新feeds源
