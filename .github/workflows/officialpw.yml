@@ -108,7 +108,7 @@ jobs:
           sed -i '12,13d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '18s/'proxy'/'disable'/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '20s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
-          sed -i '22,23s/0/1/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '22,23s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '92,104d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i 's/+chinadns-ng +dns2socks/+dns2socks/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/Makefile
           rm -f ./.config*
