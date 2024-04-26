@@ -1,4 +1,4 @@
-在线集成自动编译17/04 R 2.6
+在线集成自动编译26/04 R 1.0
 
 ## [![Release](https://img.shields.io/github/release/KFERMercer/OpenWrt-CI?color=blue)](https://github.com/KFERMercer/OpenWrt-CI/releases)
 
