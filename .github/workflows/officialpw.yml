@@ -89,8 +89,8 @@ jobs:
           pushd xipk
           rm -rf AdGuardHome
           popd
-          git clone https://github.com/sbwml/openwrt-qBittorrent
-          pushd openwrt-qBittorrent
+          git clone https://github.com/sbwml/luci-app-qbittorrent
+          pushd luci-app-qbittorrent
           rm -rf qBittorrent-static
           rm -rf qBittorrent
           popd
