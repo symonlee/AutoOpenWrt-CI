@@ -46,7 +46,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b main --single-branch https://github.com/openwrt/openwrt
+          git clone -b openwrt-23.05 --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
       - name: 更新feeds源
