@@ -93,6 +93,7 @@ jobs:
           pushd luci-app-qbittorrent
           rm -rf qBittorrent-static
           rm -rf qBittorrent
+          rm -rf rblibtorrent
           popd
           git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           git clone https://github.com/xiaorouji/openwrt-passwall-packages
