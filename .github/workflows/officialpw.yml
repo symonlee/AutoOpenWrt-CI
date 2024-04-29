@@ -104,7 +104,7 @@ jobs:
           sed -i '20s/proxy/disable/2' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '22s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '24,25s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
-          sed -i '92,104d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '93,105d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           rm -f ./.config*
           touch ./.config
           cat >> .config <<EOF
