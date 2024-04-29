@@ -124,7 +124,6 @@ jobs:
           # DNSMASQ-FULL支持:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
-          CONFIG_PACKAGE_ip6tables-nft=y
 
           # 文件系统支持:
           CONFIG_PACKAGE_block-mount=y
