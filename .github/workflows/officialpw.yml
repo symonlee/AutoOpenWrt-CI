@@ -59,6 +59,7 @@ jobs:
           rm -rf adguardhome
           rm -rf dnsproxy
           rm -rf microsocks
+          rm -rf samba4
           rm -rf sing-box
           rm -rf smartdns
           rm -rf trojan-go
@@ -70,6 +71,7 @@ jobs:
         run: |
           pushd feeds/luci/applications
           rm -rf luci-app-pbr
+          rm -rf luci-app-samba4
           rm -rf luci-app-transmission
 
       - name: 安装feeds源
