@@ -213,4 +213,4 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: OpenWrt_firmware
-          path: ./openwrt-bcm27xx-bcm2711-rpi-4-ext4-sysupgrade.img.gz,./sha256sums,./*.buildinfo
+          path: ./*.sysupgrade.img.gz,./sha256sums,./*.buildinfo
