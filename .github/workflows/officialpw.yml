@@ -213,4 +213,4 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: OpenWrt_firmware
-          path: ./*.sysupgrade.img.gz,./sha256sums,./*.buildinfo
+          path: ./bin/targets/*.sysupgrade.img.gz,./bin/targets/sha256sums,./bin/targets/*.buildinfo
