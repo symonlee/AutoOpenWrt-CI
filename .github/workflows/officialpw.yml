@@ -84,6 +84,10 @@ jobs:
           rm -rf AdGuardHome
           popd
           git clone https://github.com/sbwml/luci-app-qbittorrent
+          pushd luci-app-qbittorrent
+          rm -rf qBittorrent-static
+          rm -rf qBittorrent
+          popd
           git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           git clone https://github.com/xiaorouji/openwrt-passwall-packages
           pushd luci-app-passwall/luci-app-passwall/root/etc
