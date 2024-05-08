@@ -59,18 +59,12 @@ jobs:
           rm -rf adguardhome
           rm -rf dnsproxy
           rm -rf microsocks
-          rm -rf samba4
           rm -rf sing-box
           rm -rf smartdns
           rm -rf trojan-go
           rm -rf v2ray-core
           rm -rf v2ray-geodata
           rm -rf xray-core
-
-      - name: 删除部分luci文件
-        run: |
-          pushd feeds/luci/applications
-          rm -rf luci-app-samba4
 
       - name: 安装feeds源
         run: |
