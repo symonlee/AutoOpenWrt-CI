@@ -46,7 +46,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-23.05 --single-branch https://github.com/openwrt/openwrt
+          git clone -b main --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
       - name: 更新feeds源
@@ -152,6 +152,7 @@ jobs:
 
           # USB3.0支持:
           CONFIG_PACKAGE_kmod-usb-net=y
+          CONFIG_PACKAGE_kmod-usb-net-asix-ax88179=y
           CONFIG_PACKAGE_kmod-usb-net-rtl8152=y
           CONFIG_PACKAGE_kmod-usb2=y
           CONFIG_PACKAGE_kmod-usb2-pci=y
