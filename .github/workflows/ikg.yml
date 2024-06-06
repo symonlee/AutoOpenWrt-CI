@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: ikghxpwqbt
+name: officialpw
 
 on:
   push:
@@ -23,36 +23,83 @@ jobs:
 
     name: 树莓派4B
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
-      - name: 校验本地文件
-        uses: actions/checkout@main
-
       - name: 初始化系统环境
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
-          sudo -E apt-get update
-          sudo -E apt-get -y dist-upgrade
-          sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
-          sudo -E apt-get -y autoremove --purge
-          sudo -E apt-get clean
-          sudo timedatectl set-timezone "Asia/Hong_Kong"
+          docker rmi `docker images -q`
+          sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
+          sudo -E apt update
+          sudo -E apt -y purge azure-cli* docker* ghc* zulu* llvm* firefox google* dotnet* powershell* openjdk* mysql* php* mongodb* dotnet* snap*
+          sudo -E apt -y full-upgrade
+          sudo -E apt -y install ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
+          sudo -E systemctl daemon-reload
+          sudo -E apt -y autoremove --purge
+          sudo -E apt clean
+          sudo -E timedatectl set-timezone "Asia/Hong_Kong"
+
+      - name: 校验本地文件
+        uses: actions/checkout@main
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-23.05 --single-branch https://github.com/ikghx/openwrt-life openwrt
+          git clone -b openwrt-23.05 --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
 
+      - name: 升级golang版本
+        run: |
+          rm -rf feeds/packages/lang/golang
+          git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+
+      - name: 更新feeds源
+        run: |
+          ./scripts/feeds update -a
+
+      - name: 删除部分packages文件
+        run: |
+          pushd feeds/packages/net
+          rm -rf adguardhome
+          rm -rf microsocks
+          rm -rf sing-box
+          rm -rf smartdns
+          rm -rf trojan-go
+          rm -rf v2ray-core
+          rm -rf v2ray-geodata
+          rm -rf xray-core
+
       - name: 安装feeds源
         run: |
           ./scripts/feeds install -a
+
+      - name: Timezone patch
+        run: |
+          patch -p1 < patches/Patch-main-RPI-4.patch
+
+      - name: 构建自定义文件结构
+        run: |
+          cd package
+          mkdir openwrt-packages
+          cd openwrt-packages
+          git clone https://github.com/symonlee/openwrt-smartdns xipk
+          pushd xipk
+          rm -rf AdGuardHome
+          popd
+          git clone https://github.com/sbwml/luci-app-qbittorrent
+          pushd luci-app-qbittorrent
+          rm -rf qBittorrent-static
+          rm -rf qBittorrent
+          popd
+          git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
+          git clone https://github.com/xiaorouji/openwrt-passwall-packages
+          pushd luci-app-passwall/luci-app-passwall/root/etc
+          rm -rf hotplug.d
 
       - name: 载入自定义配置
         run: |
