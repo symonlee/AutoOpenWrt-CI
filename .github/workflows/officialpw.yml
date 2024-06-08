@@ -121,7 +121,7 @@ jobs:
 
           #CURL
           # CONFIG_LIBCURL_MBEDTLS is not set
-          CONFIG_LIBCURL_WOLFSSL=y
+          CONFIG_LIBCURL_OPENSSL=y
 
           # DNSMASQ-FULL支持:
           # CONFIG_PACKAGE_dnsmasq is not set
