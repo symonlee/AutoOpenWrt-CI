@@ -117,7 +117,7 @@ jobs:
           # CONFIG_TARGET_ROOTFS_SQUASHFS is not set
 
           # 设置固件大小:
-          CONFIG_TARGET_ROOTFS_PARTSIZE=300
+          CONFIG_TARGET_ROOTFS_PARTSIZE=600
 
           #CURL
           # CONFIG_LIBCURL_MBEDTLS is not set
