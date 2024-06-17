@@ -197,6 +197,7 @@ jobs:
           # CONFIG_PACKAGE_wpad-basic-mbedtls is not set
           # CONFIG_PACKAGE_wpad-basic-openssl is not set
           # CONFIG_PACKAGE_wpad-basic-wolfssl is not set
+          CONFIG_PACKAGE_zoneinfo-asia=y
           
           EOF
 
