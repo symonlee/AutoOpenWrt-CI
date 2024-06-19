@@ -112,6 +112,9 @@ jobs:
           CONFIG_TARGET_bcm27xx_bcm2711=y
           CONFIG_TARGET_bcm27xx_bcm2711_DEVICE_rpi-4=y
 
+          # 使用测试内核:
+          CONFIG_HAS_TESTING_KERNEL=y
+
           # 编译ext4固件:
           CONFIG_TARGET_ROOTFS_EXT4FS=y
           # CONFIG_TARGET_ROOTFS_SQUASHFS is not set
