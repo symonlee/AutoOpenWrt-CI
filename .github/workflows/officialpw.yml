@@ -159,6 +159,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ksmbd=y
           CONFIG_PACKAGE_luci-app-opkg=y
           CONFIG_PACKAGE_luci-app-passwall=y
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set
@@ -169,7 +170,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray is not set
           CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-qbittorrent_static=y
           # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
