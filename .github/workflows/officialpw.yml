@@ -148,6 +148,8 @@ jobs:
           CONFIG_PACKAGE_dnsmasq-full=y
           CONFIG_PACKAGE_dnsmasq_full_ipset=y
           # CONFIG_PACKAGE_ipv6helper is not set
+          CONFIG_PACKAGE_odhcp6c=y
+          CONFIG_PACKAGE_odhcpd-ipv6only=y
           CONFIG_PACKAGE_ip6tables-nft=y
           CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
           CONFIG_PACKAGE_iptables-mod-iprange=y
