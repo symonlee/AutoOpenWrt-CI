@@ -94,9 +94,10 @@ jobs:
           rm -rf xray-core
           rm -rf xray-plugin
 
-      - name: 删除部分package文件
-          pushd package/network/config/firewall4
-          rm -rf patches
+      - name: 删除部分patch文件
+        run: |
+          pushd package/network/config/firewall4/patches
+          rm -rf 001-firewall4-add-support-for-fullcone-nat.patch
 
       - name: 安装feeds源
         run: |
