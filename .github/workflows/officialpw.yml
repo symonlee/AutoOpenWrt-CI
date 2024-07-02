@@ -152,7 +152,7 @@ jobs:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
           CONFIG_PACKAGE_dnsmasq_full_ipset=y
-          CONFIG_PACKAGE_kmod-nft-fullcone is not set
+          # CONFIG_PACKAGE_kmod-nft-fullcone is not set
           # CONFIG_PACKAGE_ipv6helper is not set
           CONFIG_PACKAGE_odhcp6c=y
           CONFIG_PACKAGE_odhcpd-ipv6only=y
