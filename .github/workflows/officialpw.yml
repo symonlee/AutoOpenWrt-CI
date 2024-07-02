@@ -96,9 +96,8 @@ jobs:
 
       - name: 删除部分patch文件
         run: |
-          sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
-          sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
-          sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
+          pushd package/network/config/firewall4/patches
+          rm -rf 001-firewall4-add-support-for-fullcone-nat.patch
 
       - name: 安装feeds源
         run: |
@@ -153,6 +152,7 @@ jobs:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
           CONFIG_PACKAGE_dnsmasq_full_ipset=y
+          CONFIG_PACKAGE_kmod-nft-fullcone is not set
           # CONFIG_PACKAGE_ipv6helper is not set
           CONFIG_PACKAGE_odhcp6c=y
           CONFIG_PACKAGE_odhcpd-ipv6only=y
