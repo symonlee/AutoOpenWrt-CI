@@ -49,6 +49,13 @@ jobs:
           git clone -b openwrt-23.05 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
 
+      - name: 删除部分patch文件
+        run: |
+          pushd package/network/config/firewall4/patches
+          rm -rf 001-firewall4-add-support-for-fullcone-nat.patch
+          popd
+          sed -i '14,16d' package/emortal/default-settings/files/99-default-settings
+
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
@@ -93,11 +100,6 @@ jobs:
           rm -rf v2ray-plugin
           rm -rf xray-core
           rm -rf xray-plugin
-
-      - name: 删除部分patch文件
-        run: |
-          pushd package/network/config/firewall4/patches
-          rm -rf 001-firewall4-add-support-for-fullcone-nat.patch
 
       - name: 安装feeds源
         run: |
