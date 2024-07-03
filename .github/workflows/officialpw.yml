@@ -46,8 +46,15 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-23.05 --single-branch https://github.com/openwrt/openwrt
+          git clone -b openwrt-23.05 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
+
+      - name: 修改部分patch文件
+        run: |
+          sed -i '14,16d' package/emortal/default-settings/files/99-default-settings
+          sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
+          sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
+          sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
 
       - name: 更新feeds源
         run: |
@@ -58,26 +65,50 @@ jobs:
           rm -rf feeds/packages/lang/golang
           git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
+      - name: 调整插件位置
+        run: |
+          sed -i '2s/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
+          sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
+
+      - name: 删除部分luci文件
+        run: |
+          pushd feeds/luci/applications
+          rm -rf luci-app-passwall
+          rm -rf luci-app-qbittorrent
+
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/net
           rm -rf adguardhome
+          rm -rf brook
+          rm -rf chinadns-ng
+          rm -rf dns2socks
+          rm -rf dns2tcp
           rm -rf dnsproxy
+          rm -rf hysteria
+          rm -rf ipt2socks
           rm -rf microsocks
-          rm -rf sing-box
+          rm -rf naiveproxy
+          rm -rf pdnsd-alt
+          rm -rf shadowsocks-rust
+          rm -rf shadowsocksr-libev
+          rm -rf simple-obfs
           rm -rf smartdns
+          rm -rf ssocks
+          rm -rf tcping
+          rm -rf trojan
           rm -rf trojan-go
+          rm -rf trojan-plus
+          rm -rf tuic-client
           rm -rf v2ray-core
           rm -rf v2ray-geodata
+          rm -rf v2ray-plugin
           rm -rf xray-core
+          rm -rf xray-plugin
 
       - name: 安装feeds源
         run: |
           ./scripts/feeds install -a
-
-      - name: Timezone patch
-        run: |
-          patch -p1 < patches/Patch-main-RPI-4.patch
 
       - name: 构建自定义文件结构
         run: |
@@ -124,18 +155,14 @@ jobs:
           # 设置固件大小:
           CONFIG_TARGET_ROOTFS_PARTSIZE=300
 
-          #CURL
-          # CONFIG_LIBCURL_MBEDTLS is not set
-          # CONFIG_LIBCURL_WOLFSSL is not set
-          CONFIG_LIBCURL_OPENSSL=y
-          CONFIG_LIBCURL_NGHTTP2=y
-
           # DNSMASQ-FULL支持:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
+          # CONFIG_PACKAGE_ipv6helper is not set
+          CONFIG_PACKAGE_odhcp6c=y
+          CONFIG_PACKAGE_odhcpd-ipv6only=y
 
           # 文件系统支持:
-          CONFIG_PACKAGE_automount=y
           CONFIG_PACKAGE_autosamba=y
           CONFIG_PACKAGE_block-mount=y
           CONFIG_PACKAGE_kmod-fs-exfat=y
@@ -161,6 +188,7 @@ jobs:
           CONFIG_LUCI_LANG_zh_Hans=y
 
           # 常用LuCI插件选择:
+          # CONFIG_PACKAGE_luci-app-cpufreq is not set
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-opkg=y
           CONFIG_PACKAGE_luci-app-passwall=y
@@ -179,12 +207,10 @@ jobs:
           CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-qbittorrent_static=y
           # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
-          CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
           CONFIG_PACKAGE_AdGuardHome=y
-          CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_dnsproxy=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
