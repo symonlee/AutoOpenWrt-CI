@@ -70,11 +70,11 @@ jobs:
           sed -i '2s/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 
-      - name: 删除部分luci文件
+      - name: 更改部分luci文件
         run: |
           pushd feeds/luci/applications
           rm -rf luci-app-passwall
-          rm -rf luci-app-qbittorrent
+          sed -i '8d' luci-app-qbittorrent/Makefile
 
       - name: 删除部分packages文件
         run: |
@@ -205,8 +205,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
           CONFIG_PACKAGE_luci-app-qbittorrent=y
-          CONFIG_PACKAGE_luci-app-qbittorrent_static=y
-          # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
@@ -221,6 +219,7 @@ jobs:
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_luci=y
           CONFIG_PACKAGE_luci-theme-bootstrap=y
+          CONFIG_PACKAGE_qBittorrent-static=y
           # CONFIG_PACKAGE_wpad-basic-mbedtls is not set
           # CONFIG_PACKAGE_wpad-basic-openssl is not set
           # CONFIG_PACKAGE_wpad-basic-wolfssl is not set
