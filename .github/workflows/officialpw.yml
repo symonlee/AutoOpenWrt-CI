@@ -70,11 +70,10 @@ jobs:
           sed -i '2s/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 
-      - name: 更改部分luci文件
+      - name: 删除部分luci文件
         run: |
           pushd feeds/luci/applications
           rm -rf luci-app-passwall
-          sed -i '8d' luci-app-qbittorrent/Makefile
 
       - name: 删除部分packages文件
         run: |
@@ -118,11 +117,6 @@ jobs:
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf AdGuardHome
-          popd
-          git clone https://github.com/sbwml/luci-app-qbittorrent
-          pushd luci-app-qbittorrent
-          rm -rf qBittorrent-static
-          rm -rf qBittorrent
           popd
           git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           git clone https://github.com/xiaorouji/openwrt-passwall-packages
@@ -219,7 +213,6 @@ jobs:
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_luci=y
           CONFIG_PACKAGE_luci-theme-bootstrap=y
-          CONFIG_PACKAGE_qBittorrent-static=y
           # CONFIG_PACKAGE_wpad-basic-mbedtls is not set
           # CONFIG_PACKAGE_wpad-basic-openssl is not set
           # CONFIG_PACKAGE_wpad-basic-wolfssl is not set
