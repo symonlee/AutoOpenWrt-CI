@@ -46,11 +46,12 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-23.05 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
+          git clone -b main --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
       - name: 修改部分patch文件
         run: |
+          sed -i '14,16d' package/emortal/default-settings/files/99-default-settings
           sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
@@ -59,14 +60,8 @@ jobs:
         run: |
           ./scripts/feeds update -a
 
-      - name: 升级golang版本
-        run: |
-          rm -rf feeds/packages/lang/golang
-          git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
-
       - name: 调整插件位置
         run: |
-          sed -i '2s/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 
       - name: 删除部分luci文件
@@ -165,7 +160,6 @@ jobs:
           CONFIG_PACKAGE_xtables-nft=y
 
           # 文件系统支持:
-          CONFIG_PACKAGE_autosamba=y
           CONFIG_PACKAGE_block-mount=y
           CONFIG_PACKAGE_kmod-fs-exfat=y
           CONFIG_PACKAGE_kmod-fs-ext4=y
@@ -187,11 +181,12 @@ jobs:
           CONFIG_PACKAGE_kmod-usb3=y
 
           # 系统中文支持:
-          CONFIG_LUCI_LANG_zh_Hans=y
+          CONFIG_PACKAGE_default-settings-chn=y
 
           # 常用LuCI插件选择:
           # CONFIG_PACKAGE_luci-app-cpufreq is not set
           CONFIG_PACKAGE_luci-app-firewall=y
+          CONFIG_PACKAGE_luci-app-ksmbd=y
           CONFIG_PACKAGE_luci-app-opkg=y
           CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy is not set
@@ -211,6 +206,7 @@ jobs:
 
           # 常用软件包:
           CONFIG_PACKAGE_AdGuardHome=y
+          CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_dnsproxy=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
