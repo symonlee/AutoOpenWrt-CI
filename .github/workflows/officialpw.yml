@@ -51,6 +51,7 @@ jobs:
 
       - name: 修改部分patch文件
         run: |
+          sed -i '14,16d' package/emortal/default-settings/files/99-default-settings
           sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
@@ -180,6 +181,7 @@ jobs:
           CONFIG_PACKAGE_kmod-usb3=y
 
           # 系统中文支持:
+          CONFIG_PACKAGE_default-settings=y
           CONFIG_PACKAGE_default-settings-chn=y
 
           # 常用LuCI插件选择:
