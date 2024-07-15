@@ -61,6 +61,7 @@ jobs:
 
       - name: 调整插件位置
         run: |
+          sed -i '2s/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 
       - name: 删除部分luci文件
