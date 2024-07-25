@@ -238,7 +238,7 @@ jobs:
         run: |
           mkdir -p ./artifact/firmware
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*sysupgrade.img.gz" -o -name "sha256sums") ./artifact/firmware/
+          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*combined.img.gz" -o -name "sha256sums") ./artifact/firmware/
 
       - name: Upload firmware
         uses: actions/upload-artifact@main
