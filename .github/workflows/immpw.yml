@@ -21,7 +21,7 @@ jobs:
 
   build_openwrt:
 
-    name: NanoPi_R6S
+    name: NanoPi R6S
 
     runs-on: ubuntu-latest
 
