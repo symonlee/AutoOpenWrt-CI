@@ -21,7 +21,7 @@ jobs:
 
   build_openwrt:
 
-    name: 树莓派4B
+    name: NanoPi_R6S
 
     runs-on: ubuntu-latest
 
