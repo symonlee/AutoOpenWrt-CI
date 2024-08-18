@@ -57,7 +57,6 @@ jobs:
 
       - name: 修改部分patch文件
         run: |
-          sed -i '14,16d' package/emortal/default-settings/files/99-default-settings
           sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
@@ -118,7 +117,7 @@ jobs:
           pushd xipk
           rm -rf AdGuardHome
           popd
-          git clone -b test --single-branch https://github.com/ShanStone/openwrt-passwall luci-app-passwall
+          git clone https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
           git clone https://github.com/xiaorouji/openwrt-passwall-packages
           pushd luci-app-passwall/luci-app-passwall/root/etc
           rm -rf hotplug.d
