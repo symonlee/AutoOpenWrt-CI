@@ -167,7 +167,6 @@ jobs:
           CONFIG_PACKAGE_xtables-nft=y
 
           # 文件系统支持:
-          # CONFIG_USE_APK is not set
           CONFIG_PACKAGE_block-mount=y
           CONFIG_PACKAGE_kmod-fs-exfat=y
           CONFIG_PACKAGE_kmod-fs-ext4=y
