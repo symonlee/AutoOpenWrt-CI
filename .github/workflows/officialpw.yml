@@ -23,7 +23,7 @@ jobs:
 
     name: NanoPi R6S
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: 初始化系统环境
