@@ -211,6 +211,7 @@ jobs:
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
+          # CONFIG_PACKAGE_cpufreq is not set
           CONFIG_PACKAGE_luci-compat=y
           CONFIG_PACKAGE_luci-lib-ipkg=y
           CONFIG_PACKAGE_fdisk=y
