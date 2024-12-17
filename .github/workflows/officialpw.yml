@@ -131,10 +131,10 @@ jobs:
           sed -i '9s/chinadns-ng/dnsmasq/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '10s/tcp/udp/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '11s/1.1.1.1/127.0.0.1:5335/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
-          sed -i '21s/proxy/disable/2' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
-          sed -i '23s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
-          sed -i '25,26s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
-          sed -i '94,106d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '22s/proxy/disable/2' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '24s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '26,27s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '95,107d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           rm -f ./.config*
           touch ./.config
           cat >> .config <<EOF
