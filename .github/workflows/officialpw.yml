@@ -26,10 +26,6 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: 初始化系统环境
-        env:
-          DEBIAN_FRONTEND: noninteractive
-        run: |
       - name: Build System Setup
         uses: sbwml/actions@openwrt-build-setup
           sudo -E systemctl daemon-reload
