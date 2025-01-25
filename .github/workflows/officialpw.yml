@@ -30,6 +30,7 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
+          sudo -E rm -rf /etc/apt/sources.list.d
           sudo -E apt update
           sudo -E apt -y full-upgrade
           sudo -E apt -y install ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
