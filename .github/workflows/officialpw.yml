@@ -61,26 +61,24 @@ jobs:
           sed -i '2s/#src/src/g' feeds.conf.default
           sed -i '3s/src/#src/g' feeds.conf.default
           sed -i '6s/#src/src/g' feeds.conf.default
-          sed -i '6i\src-git qbittorrent https://github.com/sbwml/luci-app-qbittorrent' feeds.conf.default
 
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
 
+      - name: 调整插件位置
+        run: |
+          sed -i '10d' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
+          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
+          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/controller/qbittorrent.lua
+          sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/terminal.lua
+
       - name: 删除部分packages文件
         run: |
-          pushd feeds/packages/libs
-          rm -rf qtbase
-          rm -rf qttools
-          popd
           pushd feeds/packages/net
           rm -rf adguardhome
           rm -rf qBittorrent
-
-      - name: 删除部分luci文件
-        run: |
-          pushd feeds/luci/applications
-          rm -rf luci-app-qbittorrent
+          rm -rf qBittorrent-static
 
       - name: 安装feeds源
         run: |
@@ -147,6 +145,8 @@ jobs:
           CONFIG_PACKAGE_luci-app-ksmbd=y
           # CONFIG_PACKAGE_luci-app-nlbwmon is not set
           CONFIG_PACKAGE_luci-app-qbittorrent=y
+          # CONFIG_PACKAGE_luci-app-qbittorrent_static is not set
+          CONFIG_PACKAGE_luci-app-qbittorrent_dynamic=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
