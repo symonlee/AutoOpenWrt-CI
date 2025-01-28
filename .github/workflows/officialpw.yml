@@ -136,8 +136,8 @@ jobs:
           CONFIG_PACKAGE_luci-app-ksmbd=y
           # CONFIG_PACKAGE_luci-app-nlbwmon is not set
           CONFIG_PACKAGE_luci-app-qbittorrent=y
-          CONFIG_PACKAGE_luci-app-qbittorrent_static=y
-          # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
+          # CONFIG_PACKAGE_ luci-app-qbittorrent_staticis not set
+          CONFIG_PACKAGE_luci-app-qbittorrent_dynamic=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
