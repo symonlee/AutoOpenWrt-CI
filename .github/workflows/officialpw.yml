@@ -67,10 +67,6 @@ jobs:
         run: |
           ./scripts/feeds update -a
 
-      - name: 调整插件位置
-        run: |
-          sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/terminal.lua
-
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/libs
@@ -144,7 +140,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-accesscontrol is not set
           # CONFIG_PACKAGE_luci-app-arpbind is not set
           # CONFIG_PACKAGE_luci-app-autoreboot is not set
-          CONFIG_PACKAGE_luci-app-cpufreq=y
+          # CONFIG_PACKAGE_cpufreq is not set
           # CONFIG_PACKAGE_luci-app-ddns is not set
           # CONFIG_PACKAGE_luci-app-filetransfer is not set
           CONFIG_PACKAGE_luci-app-firewall=y
