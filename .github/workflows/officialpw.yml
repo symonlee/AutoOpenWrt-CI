@@ -61,6 +61,7 @@ jobs:
           sed -i '2s/#src/src/g' feeds.conf.default
           sed -i '3s/src/#src/g' feeds.conf.default
           sed -i '6s/#src/src/g' feeds.conf.default
+          sed -i 's/fw876/xcyll/g' feeds.conf.default
 
       - name: 更新feeds源
         run: |
