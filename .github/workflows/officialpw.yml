@@ -110,6 +110,7 @@ jobs:
           # CONFIG_TARGET_ROOTFS_EXT4FS is not set
 
           # 设置固件大小:
+          CONFIG_TARGET_KERNEL_PARTSIZE=64
           CONFIG_TARGET_ROOTFS_PARTSIZE=300
 
           # DNSMASQ-FULL支持:
