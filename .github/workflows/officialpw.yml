@@ -71,6 +71,7 @@ jobs:
           sed -i '10d' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/controller/qbittorrent.lua
+          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/view/qbittorrent_status.htm
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/terminal.lua
 
       - name: 删除部分packages文件
