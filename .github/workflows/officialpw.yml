@@ -77,8 +77,6 @@ jobs:
         run: |
           pushd feeds/packages/net
           rm -rf adguardhome
-          rm -rf qBittorrent
-          rm -rf qBittorrent-static
 
       - name: 安装feeds源
         run: |
