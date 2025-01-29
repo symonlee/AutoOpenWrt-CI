@@ -167,6 +167,7 @@ jobs:
           CONFIG_PACKAGE_AdGuardHome=y
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_btop=y
+          # CONFIG_PACKAGE_coremark is not set
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
