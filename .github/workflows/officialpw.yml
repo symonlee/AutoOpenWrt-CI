@@ -68,6 +68,7 @@ jobs:
 
       - name: 调整插件位置
         run: |
+          sed -i 's/system/services/g' feeds/luci/applications/luci-app-filetransfer/luasrc/controller/filetransfer.lua
           sed -i '10d' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/controller/qbittorrent.lua
@@ -139,7 +140,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-autoreboot is not set
           # CONFIG_PACKAGE_cpufreq is not set
           # CONFIG_PACKAGE_luci-app-ddns is not set
-          # CONFIG_PACKAGE_luci-app-filetransfer is not set
+          CONFIG_PACKAGE_luci-app-filetransfer=y
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-ksmbd=y
           # CONFIG_PACKAGE_luci-app-nlbwmon is not set
