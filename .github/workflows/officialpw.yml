@@ -58,6 +58,13 @@ jobs:
 
       - name: 修改部分submodule
         run: |
+          sed -i '48a\
+          echo '\''iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user\
+          echo '\''iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user\
+          \
+          echo '\''[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user\
+          echo '\''[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user
+          ' package/lean/default-settings/files/zzz-default-settings
           sed -i '2s/#src/src/g' feeds.conf.default
           sed -i '3s/src/#src/g' feeds.conf.default
           sed -i '6s/#src/src/g' feeds.conf.default
@@ -110,7 +117,6 @@ jobs:
           # CONFIG_TARGET_ROOTFS_EXT4FS is not set
 
           # 设置固件大小:
-          CONFIG_TARGET_KERNEL_PARTSIZE=64
           CONFIG_TARGET_ROOTFS_PARTSIZE=300
 
           # DNSMASQ-FULL支持:
