@@ -74,6 +74,11 @@ jobs:
         run: |
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 
+      - name: 删除部分luci文件
+        run: |
+          pushd feeds/luci/applications
+          rm -rf luci-app-homeproxy
+
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/net
