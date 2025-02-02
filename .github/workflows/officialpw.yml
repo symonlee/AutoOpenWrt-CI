@@ -86,6 +86,16 @@ jobs:
         run: |
           pushd feeds/packages/net
           rm -rf adguardhome
+          rm -rf chinadns-ng
+          rm -rf dns2socks
+          rm -rf dns2tcp
+          rm -rf microsocks
+          rm -rf mosdns
+          rm -rf shadowsocksr-libev
+          rm -rf tcping
+          rm -rf trojan
+          rm -rf xray-core
+          rm -rf xray-plugin
 
       - name: 安装feeds源
         run: |
