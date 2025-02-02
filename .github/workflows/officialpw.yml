@@ -56,6 +56,10 @@ jobs:
           git clone -b openwrt-23.05 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
 
+      - name: 修改部分submodule
+        run: |
+          sed -i '$a src-git homeproxy https://github.com/immortalwrt/homeproxy.git' feeds.conf.default
+
       - name: 修改部分patch文件
         run: |
           sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
