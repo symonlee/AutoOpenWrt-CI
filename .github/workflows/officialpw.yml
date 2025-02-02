@@ -53,7 +53,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-23.05 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
+          git clone -b openwrt-24.10 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
 
       - name: 修改部分submodule
