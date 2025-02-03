@@ -67,7 +67,6 @@ jobs:
           ' package/lean/default-settings/files/zzz-default-settings
           sed -i '2s/#src/src/g' feeds.conf.default
           sed -i '3s/src/#src/g' feeds.conf.default
-          sed -i '6s/#src/src/g' feeds.conf.default
 
       - name: 更新feeds源
         run: |
@@ -86,14 +85,32 @@ jobs:
         run: |
           pushd feeds/packages/net
           rm -rf adguardhome
+          rm -rf brook
           rm -rf chinadns-ng
           rm -rf dns2socks
           rm -rf dns2tcp
+          rm -rf dnsproxy
+          rm -rf geoview
+          rm -rf hysteria
+          rm -rf ipt2socks
           rm -rf microsocks
           rm -rf mosdns
+          rm -rf naiveproxy
+          rm -rf pdnsd-alt
+          rm -rf shadowsocks-rust
           rm -rf shadowsocksr-libev
+          rm -rf simple-obfs
+          rm -rf sing-box
+          rm -rf smartdns
+          rm -rf ssocks
           rm -rf tcping
           rm -rf trojan
+          rm -rf trojan-go
+          rm -rf trojan-plus
+          rm -rf tuic-client
+          rm -rf v2ray-core
+          rm -rf v2ray-geodata
+          rm -rf v2ray-plugin
           rm -rf xray-core
           rm -rf xray-plugin
 
