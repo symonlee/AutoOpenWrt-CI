@@ -106,6 +106,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
+          git clone https://github.com/fw876/helloworld
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
