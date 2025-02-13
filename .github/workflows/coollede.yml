@@ -123,7 +123,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/fw876/helloworld
+          git clone -b socks --single-branch https://github.com/zxlhhyccc/helloworld
           sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua 
           sed -i '/tcp:\/\/1\.1\.1\.1:53/a\
           o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))\
