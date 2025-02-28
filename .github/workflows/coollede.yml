@@ -137,7 +137,7 @@ jobs:
           sed -i '25s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           sed -i '39,40d' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           sed -i '/list Interface '\''lan'\''/i\
-          \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
