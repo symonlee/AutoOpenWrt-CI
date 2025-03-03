@@ -77,6 +77,7 @@ jobs:
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-filetransfer/luasrc/controller/filetransfer.lua
           sed -i '10d' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
+          sed -i '17,21d' feeds/luci/applications/luci-app-ksmbd/luasrc/model/cbi/cifsd.lua
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/controller/qbittorrent.lua
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/view/qbittorrent_status.htm
           sed -i 's/10/65/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/terminal.lua
