@@ -127,7 +127,7 @@ jobs:
           git clone -b custom --single-branch https://github.com/zxlhhyccc/helloworld
           sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '143s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '187s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '194s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
           sed -i '198s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
