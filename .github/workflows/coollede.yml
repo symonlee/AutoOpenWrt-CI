@@ -65,10 +65,22 @@ jobs:
           echo '\''[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user\
           echo '\''[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user
           ' package/lean/default-settings/files/zzz-default-settings
+          sed -i '2s/#src/src/g' feeds.conf.default
+          sed -i '3s/src/#src/g' feeds.conf.default
 
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
+
+      - name: 调整插件位置
+        run: |
+          sed -i 's/system/services/g' feeds/luci/applications/luci-app-filetransfer/luasrc/controller/filetransfer.lua
+          sed -i '10d' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
+          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
+          sed -i '17,21d' feeds/luci/applications/luci-app-ksmbd/luasrc/model/cbi/cifsd.lua
+          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/controller/qbittorrent.lua
+          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/view/qbittorrent_status.htm
+          sed -i 's/10/65/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/terminal.lua
 
       - name: 删除部分packages文件
         run: |
@@ -113,6 +125,20 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone -b custom --single-branch https://github.com/zxlhhyccc/helloworld
+          sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '143s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '194s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '198s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
+          sed -i '/commit firewall/a\
+          \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
+          sed -i '/$ipt -A SS_SPEC_TPROXY -p udp --dport 80 -j DROP/i \		$ipt -A SS_SPEC_TPROXY -p udp --dport 443 -j DROP' helloworld/luci-app-ssr-plus/root/usr/bin/ssr-rules
+          sed -i '13s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '25s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '39,40d' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '/list Interface '\''lan'\''/i\
+          \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
