@@ -125,20 +125,6 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone -b custom --single-branch https://github.com/zxlhhyccc/helloworld
-          sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '143s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '194s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '198s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
-          sed -i '/commit firewall/a\
-          \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
-          sed -i '/$ipt -A SS_SPEC_TPROXY -p udp --dport 80 -j DROP/i \		$ipt -A SS_SPEC_TPROXY -p udp --dport 443 -j DROP' helloworld/luci-app-ssr-plus/root/usr/bin/ssr-rules
-          sed -i '13s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '25s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '39,40d' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '/list Interface '\''lan'\''/i\
-          \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
