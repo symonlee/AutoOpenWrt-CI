@@ -124,12 +124,19 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone -b custom --single-branch https://github.com/zxlhhyccc/helloworld
+          git clone https://github.com/fw876/helloworld
           sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '143s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '194s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '/o:depends("shunt_parse_method", "single_dns")/i\
+          \to:value("127.0.0.1:5339", translate("Custom DNS (127.0.0.1:5339)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '133,140d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '134,135d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
           sed -i '/tcp:\/\/1\.1\.1\.1:53/a o:value("https://1.1.1.1/dns-query,https://1.0.0.1/dns-query", translate("Cloudflare DoH DNS"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '/o:value("1.1.1.1:53", translate("Cloudflare DNS (1.1.1.1)"))/a o:value("127.0.0.1:5339", translate("Custom DNS (127.0.0.1:5339)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '/o:depends("parse_method", "single_dns")/i\
+          \to:value("127.0.0.1:5339", translate("Custom DNS (127.0.0.1:5339)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
           sed -i '131s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
           sed -i '/commit firewall/a\
           \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
