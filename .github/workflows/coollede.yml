@@ -125,6 +125,20 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone -b custom --single-branch https://github.com/zxlhhyccc/helloworld
+          sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '146s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '222s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '138,145d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '139,140d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '131s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
+          sed -i '/commit firewall/a\
+          \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
+          sed -i '/$ipt -A SS_SPEC_TPROXY -p udp --dport 80 -j DROP/i \		$ipt -A SS_SPEC_TPROXY -p udp --dport 443 -j DROP' helloworld/luci-app-ssr-plus/root/usr/bin/ssr-rules
+          sed -i '13s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '25s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '39,40d' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '/list Interface '\''lan'\''/i\
+          \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
@@ -191,7 +205,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ChinaDNS_NG=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2TCP=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2TCP is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNSPROXY is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_MosDNS is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
