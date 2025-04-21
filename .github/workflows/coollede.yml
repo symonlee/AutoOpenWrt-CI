@@ -124,7 +124,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone -b custom --single-branch https://github.com/zxlhhyccc/helloworld
+          git clone https://github.com/fw876/helloworld
           sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '146s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '200,207d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
@@ -205,7 +205,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ChinaDNS_NG=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2TCP=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2TCP is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNSPROXY is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_MosDNS is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
@@ -218,7 +218,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-wol is not set
 
           # 常用软件包:
-          CONFIG_PACKAGE_AdGuardHome=y
           CONFIG_PACKAGE_adguardhome=y
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_btop=y
@@ -255,26 +254,12 @@ jobs:
 
       - name: 固件整理
         run: |
-          mkdir -p ./artifact/package
-          mkdir -p ./artifact/buildinfo
+          mkdir -p ./artifact/firmware
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-
-      - name: Upload buildinfo
-        uses: actions/upload-artifact@main
-        with:
-          name: OpenWrt_buildinfo
-          path: ./artifact/buildinfo/
-
-      - name: Upload package
-        uses: actions/upload-artifact@main
-        with:
-          name: OpenWrt_package
-          path: ./artifact/package/
+          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*sysupgrade.img.gz" -o -name "sha256sums") ./artifact/firmware/
 
       - name: Upload firmware
         uses: actions/upload-artifact@main
         with:
           name: OpenWrt_firmware
-          path: ./bin/targets/
+          path: ./artifact/firmware/
