@@ -125,6 +125,8 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone https://github.com/fw876/helloworld
+          sed -i '14d' helloworld/luci-app-ssr-plus/Makefile
+          sed -i 's/\+dns2tcp //g' helloworld/luci-app-ssr-plus/Makefile
           sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '146s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '200,207d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
