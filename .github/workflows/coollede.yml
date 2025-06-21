@@ -56,31 +56,9 @@ jobs:
           git clone https://github.com/coolsnowwolf/lede openwrt
           mv ./openwrt/* ./
 
-      - name: 修改部分submodule
-        run: |
-          sed -i '48a\
-          echo '\''iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user\
-          echo '\''iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user\
-          \
-          echo '\''[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user\
-          echo '\''[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user
-          ' package/lean/default-settings/files/zzz-default-settings
-          sed -i '2s/#src/src/g' feeds.conf.default
-          sed -i '3s/src/#src/g' feeds.conf.default
-
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
-
-      - name: 调整插件位置
-        run: |
-          sed -i 's/system/services/g' feeds/luci/applications/luci-app-filetransfer/luasrc/controller/filetransfer.lua
-          sed -i '10d' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
-          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-ksmbd/luasrc/controller/cifsd.lua
-          sed -i '17,21d' feeds/luci/applications/luci-app-ksmbd/luasrc/model/cbi/cifsd.lua
-          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/controller/qbittorrent.lua
-          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-qbittorrent/luasrc/view/qbittorrent_status.htm
-          sed -i 's/10/65/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/terminal.lua
 
       - name: 删除部分packages文件
         run: |
