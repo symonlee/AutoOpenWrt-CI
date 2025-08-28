@@ -65,8 +65,6 @@ jobs:
           echo '\''[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user\
           echo '\''[ -n "$(command -v ip6tables)" ] && ip6tables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53'\'' >> /etc/firewall.user
           ' package/lean/default-settings/files/zzz-default-settings
-          sed -i '2s/#src/src/g' feeds.conf.default
-          sed -i '4s/src/#src/g' feeds.conf.default
 
       - name: 更新feeds源
         run: |
