@@ -137,7 +137,6 @@ jobs:
           rm -rf qBittorrent-static
           rm -rf qBittorrent
           rm -rf dnsproxy
-          popd
 
       - name: 载入自定义配置
         run: |
