@@ -73,11 +73,6 @@ jobs:
           sed -i 's/<%:Up%>/<%:Move up%>/g' feeds/luci/modules/luci-compat/luasrc/view/cbi/tblsection.htm
           sed -i 's/<%:Down%>/<%:Move down%>/g' feeds/luci/modules/luci-compat/luasrc/view/cbi/tblsection.htm
 
-      - name: 删除部分luci文件
-        run: |
-          pushd feeds/luci/applications
-          rm -rf luci-app-qbittorrent
-
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/net
@@ -147,8 +142,6 @@ jobs:
           rm -rf qBittorrent-static
           rm -rf qBittorrent
           rm -rf dnsproxy
-          popd
-          git clone https://github.com/sbwml/openwrt-qBittorrent
 
       - name: 载入自定义配置
         run: |
