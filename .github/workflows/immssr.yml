@@ -70,8 +70,6 @@ jobs:
       - name: 调整插件位置&翻译优化
         run: |
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
-          sed -i 's/<%:Up%>/<%:Move up%>/g' feeds/luci/modules/luci-compat/luasrc/view/cbi/tblsection.htm
-          sed -i 's/<%:Down%>/<%:Move down%>/g' feeds/luci/modules/luci-compat/luasrc/view/cbi/tblsection.htm
 
       - name: 删除部分luci文件
         run: |
@@ -133,7 +131,7 @@ jobs:
           sed -i '200,207d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '219s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '224,231d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '133s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
+          sed -i '158s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
           sed -i '/commit firewall/a\
           \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
           sed -i '/$ipt -A SS_SPEC_TPROXY -p udp --dport 80 -j DROP/i \		$ipt -A SS_SPEC_TPROXY -p udp --dport 443 -j DROP' helloworld/luci-app-ssr-plus/root/usr/bin/ssr-rules
