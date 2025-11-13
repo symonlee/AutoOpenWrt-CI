@@ -124,7 +124,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/zxlhhyccc/helloworld
+          git clone-b tuic --single-branch https://github.com/zxlhhyccc/helloworld
           sed -i '14d' helloworld/luci-app-ssr-plus/Makefile
           sed -i 's/\+dns2tcp //g' helloworld/luci-app-ssr-plus/Makefile
           sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
@@ -147,7 +147,7 @@ jobs:
           rm -rf qBittorrent
           rm -rf dnsproxy
           popd
-          git clone -b tuic --single-branch https://github.com/sbwml/openwrt-qBittorrent
+          git clone https://github.com/sbwml/openwrt-qBittorrent
 
       - name: 载入自定义配置
         run: |
