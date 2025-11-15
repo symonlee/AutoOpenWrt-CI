@@ -124,14 +124,14 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/xcyll/helloworld
-          sed -i '14d' helloworld/luci-app-ssr-plus/Makefile
+          git clone -b tuic --single-branch  https://github.com/zxlhhyccc/helloworld
+          sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
           sed -i 's/\+dns2tcp //g' helloworld/luci-app-ssr-plus/Makefile
-          sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '146s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '200,207d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '219s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '224,231d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '154s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '208,215d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '227s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '232,239d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
           sed -i '158s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
           sed -i '/commit firewall/a\
           \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
@@ -170,6 +170,9 @@ jobs:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
           CONFIG_PACKAGE_dnsmasq_full_ipset=y
+          # CONFIG_PACKAGE_dnsmasq_full_nftset is not set
+          CONFIG_PACKAGE_firewall=y
+          # CONFIG_PACKAGE_firewall4 is not set
           # CONFIG_PACKAGE_ipv6helper is not set
           CONFIG_PACKAGE_odhcp6c=y
           CONFIG_PACKAGE_odhcpd-ipv6only=y
@@ -205,6 +208,9 @@ jobs:
           CONFIG_PACKAGE_luci-app-package-manager=y
           CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
