@@ -125,13 +125,13 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone -b tuic --single-branch  https://github.com/zxlhhyccc/helloworld
-          sed -i '14d' helloworld/luci-app-ssr-plus/Makefile
+          sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
           sed -i 's/\+dns2tcp //g' helloworld/luci-app-ssr-plus/Makefile
-          sed -i '56s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '146s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '200,207d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '219s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '224,231d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '154s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '208,215d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '235s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '232,239d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
           sed -i '158s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
           sed -i '/commit firewall/a\
           \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
