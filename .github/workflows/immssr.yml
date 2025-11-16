@@ -51,7 +51,7 @@ jobs:
       - name: 校验本地文件
         uses: actions/checkout@main
 
-      - name: Free Disk Space (Ubuntu)
+      - name: 释放磁盘空间 (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
           # this might remove tools that are actually needed,
