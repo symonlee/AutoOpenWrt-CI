@@ -67,7 +67,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-24.10 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
+          git clone -b master --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
 
       - name: 修改部分patch文件
@@ -138,7 +138,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone -b tuic --single-branch https://github.com/zxlhhyccc/helloworld
+          git clone https://github.com/fw876/helloworld
           sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
           sed -i 's/\+dns2tcp //g' helloworld/luci-app-ssr-plus/Makefile
           sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
@@ -192,6 +192,7 @@ jobs:
           CONFIG_PACKAGE_odhcpd-ipv6only=y
 
           # 文件系统支持:
+          # CONFIG_USE_APK is not set
           CONFIG_PACKAGE_block-mount=y
           CONFIG_PACKAGE_kmod-fs-exfat=y
           CONFIG_PACKAGE_kmod-fs-ext4=y
@@ -212,7 +213,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-cpufreq is not set
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
-          CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
           CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
@@ -220,9 +220,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
@@ -234,7 +231,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
