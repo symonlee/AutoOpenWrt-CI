@@ -86,11 +86,6 @@ jobs:
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
 
-      - name: 删除部分luci文件
-        run: |
-          pushd feeds/luci/applications
-          rm -rf luci-app-qbittorrent
-
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/net
@@ -160,8 +155,6 @@ jobs:
           rm -rf qBittorrent-static
           rm -rf qBittorrent
           rm -rf dnsproxy
-          popd
-          git clone https://github.com/sbwml/openwrt-qBittorrent
 
       - name: 载入自定义配置
         run: |
