@@ -208,6 +208,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
           CONFIG_PACKAGE_luci-app-ksmbd=y
+          CONFIG_PACKAGE_luci-app-passwall=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
           CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
