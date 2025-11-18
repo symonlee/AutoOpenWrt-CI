@@ -95,7 +95,6 @@ jobs:
           rm -rf dns2socks
           rm -rf dns2tcp
           rm -rf dnsproxy
-          rm -rf geoview
           rm -rf hysteria
           rm -rf ipt2socks
           rm -rf microsocks
@@ -105,7 +104,6 @@ jobs:
           rm -rf shadowsocks-rust
           rm -rf shadowsocksr-libev
           rm -rf simple-obfs
-          rm -rf sing-box
           rm -rf smartdns
           rm -rf ssocks
           rm -rf tcping
