@@ -86,6 +86,11 @@ jobs:
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
 
+      - name: 删除部分luci文件
+        run: |
+          pushd feeds/luci/applications
+          rm -rf luci-app-attendedsysupgrade
+
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/net
