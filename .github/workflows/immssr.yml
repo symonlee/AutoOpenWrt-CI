@@ -67,24 +67,16 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b master --single-branch https://github.com/immortalwrt/immortalwrt openwrt
+          git clone -b main --single-branch https://github.com/openwrt/openwrt
           mv ./openwrt/* ./
 
       - name: 修改部分patch文件
         run: |
-          sed -i '16,18d' package/emortal/default-settings/files/99-default-settings
           sed -i '3s/REJECT/ACCEPT/g' package/network/config/firewall/files/firewall.config
-          sed -i '6s/1/0/g' package/network/config/firewall/files/firewall.config
-          sed -i '7s/1/0/g' package/network/config/firewall/files/firewall.config
 
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
-
-      - name: 调整插件位置&翻译优化
-        run: |
-          sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
-          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
 
       - name: 删除部分系统组件
         run: |
@@ -227,7 +219,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
