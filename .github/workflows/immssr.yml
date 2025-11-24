@@ -255,7 +255,13 @@ jobs:
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
+          
+      - name: Disable Python3 PGO
+        run: |
+          echo "CONFIG_PYTHON3_PGO_OPTIMIZE=n" >> .config
+          echo "CONFIG_PYTHON3_HOST_PGO_OPTIMIZE=n" >> .config
           make defconfig
+
 
       - name: 进行固件编译
         run: |
