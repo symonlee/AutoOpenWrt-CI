@@ -67,7 +67,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b master --single-branch https://github.com/immortalwrt/immortalwrt openwrt
+          git clone -b 24.10 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
 
       - name: 修改部分patch文件
@@ -131,11 +131,6 @@ jobs:
       - name: 安装feeds源
         run: |
           ./scripts/feeds install -a
-
-      - name: Disable Python3 PGO
-        run: |
-          sed -i '/with-system-expat/a\CONFIGURE_ARGS += --disable-pgo' \
-            feeds/packages/lang/python/python3/Makefile
 
       - name: 构建自定义文件结构
         run: |
@@ -261,7 +256,6 @@ jobs:
 
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
-
 
       - name: 进行固件编译
         run: |
