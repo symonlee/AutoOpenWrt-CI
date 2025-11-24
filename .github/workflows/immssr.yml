@@ -132,6 +132,11 @@ jobs:
         run: |
           ./scripts/feeds install -a
 
+      - name: Disable Python3 PGO
+        run: |
+          sed -i '/with-system-expat/a\CONFIGURE_ARGS += --disable-pgo' \
+            feeds/packages/lang/python/python3/Makefile
+
       - name: 构建自定义文件结构
         run: |
           cd package
@@ -255,11 +260,6 @@ jobs:
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
-          
-      - name: Disable Python3 PGO
-        run: |
-          echo "CONFIG_PYTHON3_PGO_OPTIMIZE=n" >> .config
-          echo "CONFIG_PYTHON3_HOST_PGO_OPTIMIZE=n" >> .config
           make defconfig
 
 
