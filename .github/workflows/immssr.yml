@@ -86,10 +86,6 @@ jobs:
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
 
-      - name: 删除部分系统组件
-        run: |
-          sed -i 's/attendedsysupgrade/firewall/g' feeds/luci/collections/luci/Makefile
-
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/net
@@ -189,7 +185,6 @@ jobs:
           CONFIG_PACKAGE_odhcpd-ipv6only=y
 
           # 文件系统支持:
-          # CONFIG_USE_APK is not set
           CONFIG_PACKAGE_block-mount=y
           CONFIG_PACKAGE_kmod-fs-exfat=y
           CONFIG_PACKAGE_kmod-fs-ext4=y
@@ -232,6 +227,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
           CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
