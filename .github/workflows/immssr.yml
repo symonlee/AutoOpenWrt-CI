@@ -145,7 +145,6 @@ jobs:
           sed -i '158s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
           sed -i '/commit firewall/a\
           \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
-          sed -i '/$ipt -A SS_SPEC_TPROXY -p udp --dport 80 -j DROP/i \		$ipt -A SS_SPEC_TPROXY -p udp --dport 443 -j DROP' helloworld/luci-app-ssr-plus/root/usr/bin/ssr-rules
           sed -i '13s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           sed -i '25s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           sed -i '40,41d' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
