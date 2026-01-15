@@ -131,7 +131,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone -b test --single-branch https://github.com/fw876/helloworld
+          git clone -b test --single-branch https://github.com/symonlee/helloworld
           sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
           sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '154s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
