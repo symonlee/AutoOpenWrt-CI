@@ -72,7 +72,6 @@ jobs:
 
       - name: 修改部分patch文件
         run: |
-          sed -i '16,18d' package/emortal/default-settings/files/99-default-settings
           sed -i '6s/1/0/g' package/network/config/firewall/files/firewall.config
           sed -i '7s/1/0/g' package/network/config/firewall/files/firewall.config
 
