@@ -67,7 +67,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone -b openwrt-24.10 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
+          git clone -b openwrt-25.12 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
 
       - name: 修改部分patch文件
@@ -83,6 +83,10 @@ jobs:
         run: |
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
+
+      - name: 替换部分默认luci组件
+        run: |
+          sed -i 's/+luci-app-attendedsysupgrade/+luci-app-ttyd/g' feeds/luci/collections/luci/Makefile
 
       - name: 删除部分packages文件
         run: |
