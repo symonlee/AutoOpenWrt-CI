@@ -105,6 +105,7 @@ jobs:
           rm -rf shadowsocks-rust
           rm -rf shadowsocksr-libev
           rm -rf simple-obfs
+          rm -rf sing-box
           rm -rf smartdns
           rm -rf ssocks
           rm -rf tcping
