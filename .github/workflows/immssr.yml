@@ -88,6 +88,11 @@ jobs:
         run: |
           sed -i 's/+luci-app-attendedsysupgrade/+luci-app-ttyd/g' feeds/luci/collections/luci/Makefile
 
+      - name: 删除部分luci文件
+        run: |
+          pushd feeds/luci/applications
+          rm -rf luci-app-passwall
+
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/net
@@ -135,24 +140,10 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/fw876/helloworld
-          sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
-          sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '154s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '208,215d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '227s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '146,156d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '145a o:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '222,229d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '222a \\to:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '158s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
-          sed -i '/commit firewall/a\
-          \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
-          sed -i '13s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '25s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '40,41d' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '/list Interface '\''lan'\''/i\
-          \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          git clone https://github.com/Openwrt-Passwall/openwrt-passwall
+          git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages
+          pushd openwrt-passwall/luci-app-passwall/root/etc
+          rm -rf hotplug.d
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
@@ -209,28 +200,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
           CONFIG_PACKAGE_luci-app-samba4=y
-          CONFIG_PACKAGE_luci-app-ssr-plus=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ChinaDNS_NG=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2TCP is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNSPROXY is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_MosDNS is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
+          CONFIG_PACKAGE_luci-app-passwall=y
           CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
