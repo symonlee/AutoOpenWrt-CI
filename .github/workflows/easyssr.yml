@@ -67,17 +67,12 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone https://github.com/openwrt/openwrt
+          git clone https://github.com/openwrt/openwrt openwrt
           mv ./openwrt/* ./
 
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
-
-      - name: 调整插件位置&翻译优化
-        run: |
-          sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
-          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
 
       - name: 删除部分packages文件
         run: |
@@ -126,23 +121,6 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone https://github.com/fw876/helloworld
-          sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
-          sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '154s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '208,215d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '227s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '146,156d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '145a o:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '222,229d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '222a \\to:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '158s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
-          sed -i '/commit firewall/a\
-          \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
-          sed -i '13s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '25s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '40,41d' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
-          sed -i '/list Interface '\''lan'\''/i\
-          \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
