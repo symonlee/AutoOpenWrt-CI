@@ -135,7 +135,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/fw876/helloworld
+          git clone https://github.com/foy666/helloworld
           sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
           sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '154s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
@@ -145,7 +145,7 @@ jobs:
           sed -i '145a o:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
           sed -i '222,229d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
           sed -i '222a \\to:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '158s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
+          sed -i '203s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
           sed -i '/commit firewall/a\
           \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
           sed -i '13s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
