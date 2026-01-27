@@ -67,7 +67,7 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone https://github.com/openwrt/openwrt openwrt
+          git clone -b openwrt-24.10 --single-branch https://github.com/openwrt/openwrt openwrt
           mv ./openwrt/* ./
 
       - name: 更新feeds源
@@ -176,8 +176,8 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Clientt=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client is not set
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server is not set
