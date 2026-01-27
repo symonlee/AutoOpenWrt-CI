@@ -237,12 +237,26 @@ jobs:
 
       - name: 固件整理
         run: |
-          mkdir -p ./artifact/firmware
+          mkdir -p ./artifact/package
+          mkdir -p ./artifact/buildinfo
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*sysupgrade.img.gz" -o -name "sha256sums") ./artifact/firmware/
+          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
+          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+
+      - name: Upload buildinfo
+        uses: actions/upload-artifact@main
+        with:
+          name: OpenWrt_buildinfo
+          path: ./artifact/buildinfo/
+
+      - name: Upload package
+        uses: actions/upload-artifact@main
+        with:
+          name: OpenWrt_package
+          path: ./artifact/package/
 
       - name: Upload firmware
         uses: actions/upload-artifact@main
         with:
           name: OpenWrt_firmware
-          path: ./artifact/firmware/
+          path: ./bin/targets/
