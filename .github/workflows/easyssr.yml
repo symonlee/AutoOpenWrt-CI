@@ -30,7 +30,7 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          docker images -q | xargs -r docker rmi
+          docker image prune -f
           sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
           sudo -E apt update
           sudo -E apt -y purge azure-cli* docker* ghc* zulu* llvm* firefox google* dotnet* powershell* openjdk* mysql* php* mongodb* dotnet* snap*
@@ -49,7 +49,7 @@ jobs:
           sudo -E timedatectl set-timezone "Asia/Hong_Kong"
 
       - name: 校验本地文件
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
 
       - name: 释放磁盘空间 (Ubuntu)
         uses: jlumbroso/free-disk-space@main
@@ -253,19 +253,19 @@ jobs:
           cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
 
       - name: Upload buildinfo
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_buildinfo
           path: ./artifact/buildinfo/
 
       - name: Upload package
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_package
           path: ./artifact/package/
 
       - name: Upload firmware
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_firmware
           path: ./bin/targets/
