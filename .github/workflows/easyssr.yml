@@ -128,7 +128,7 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone -b Dev --single-branch https://github.com/Openwrt-Passwall/openwrt-passwall luci-app-passwall
-          https://github.com/Openwrt-Passwall/openwrt-passwall-packages
+          git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages
           pushd luci-app-passwall/luci-app-passwall/root/etc
           rm -rf hotplug.d
           popd
