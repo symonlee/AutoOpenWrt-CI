@@ -127,15 +127,27 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/fw876/helloworld
+          git clone -b Dev --single-branch https://github.com/Openwrt-Passwall/openwrt-passwall luci-app-passwall
+          https://github.com/Openwrt-Passwall/openwrt-passwall-packages
+          pushd luci-app-passwall/luci-app-passwall/root/etc
+          rm -rf hotplug.d
+          popd
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
           rm -rf qBittorrent
           rm -rf dnsproxy
 
+
       - name: 载入自定义配置
         run: |
+          sed -i '6s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '7s/chinadns-ng/dnsmasq/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '8s/tcp/udp/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '9s/1.1.1.1/127.0.0.1:6553/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '20s/proxy/disable/2' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '22s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '91,103d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           rm -f ./.config*
           touch ./.config
           cat >> .config <<EOF
@@ -179,38 +191,24 @@ jobs:
           # CONFIG_PACKAGE_luci-app-cpufreq is not set
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
-          CONFIG_PACKAGE_luci-app-ssr-plus=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS_RUST is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNSPROXY is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_MosDNS is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Tuic_Client is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadow_TLS is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_IPT2Socks is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2 is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_V2ray_Plugin is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Server is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan is not set
+          CONFIG_PACKAGE_luci-app-passwall=y
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Server is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs is not set
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_SingBox=y
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata=y
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
+          CONFIG_PACKAGE_luci-app-smartdns=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
           CONFIG_PACKAGE_autocore=y
+          CONFIG_PACKAGE_smartdns-ui=y
           CONFIG_PACKAGE_btop=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
