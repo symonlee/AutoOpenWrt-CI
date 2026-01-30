@@ -49,7 +49,7 @@ jobs:
           sudo -E timedatectl set-timezone "Asia/Hong_Kong"
 
       - name: 校验本地文件
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
 
       - name: 释放磁盘空间 (Ubuntu)
         uses: jlumbroso/free-disk-space@main
@@ -67,8 +67,15 @@ jobs:
 
       - name: 克隆源码
         run: |
-          git clone https://github.com/openwrt/openwrt openwrt
+          git clone -b openwrt-24.10 --single-branch https://github.com/immortalwrt/immortalwrt openwrt
           mv ./openwrt/* ./
+
+      - name: 修改部分patch文件
+        run: |
+          sed -i '16,18d' package/emortal/default-settings/files/99-default-settings
+          sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
+          sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
+          sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
 
       - name: 更新feeds源
         run: |
@@ -183,7 +190,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS_RUST is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNSPROXY is not set
@@ -200,7 +207,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Server is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan is not set
-          CONFIG_PACKAGE_luci-app-smartdns=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
@@ -238,12 +244,25 @@ jobs:
 
       - name: 固件整理
         run: |
-          mkdir -p ./artifact/firmware
+          mkdir -p ./artifact/package
+          mkdir -p ./artifact/buildinfo
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*sysupgrade.img.gz" -o -name "sha256sums") ./artifact/firmware/
+          cp -rf $(find ./bin/packages/ -type f -name "*.apk") ./artifact/package/
+          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+      - name: Upload buildinfo
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenWrt_buildinfo
+          path: ./artifact/buildinfo/
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenWrt_package
+          path: ./artifact/package/
 
       - name: Upload firmware
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_firmware
-          path: ./artifact/firmware/
+          path: ./bin/targets/
