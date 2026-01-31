@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: easyssr+
+name: immssr+
 
 on:
   push:
@@ -72,7 +72,8 @@ jobs:
 
       - name: 修改部分patch文件
         run: |
-          sed -i '16,18d' package/emortal/default-settings/files/99-default-settings
+          sed -i '6s/1/0/g' package/network/config/firewall/files/firewall.config
+          sed -i '7s/1/0/g' package/network/config/firewall/files/firewall.config
           sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
@@ -80,6 +81,11 @@ jobs:
       - name: 更新feeds源
         run: |
           ./scripts/feeds update -a
+
+      - name: 调整插件位置&翻译优化
+        run: |
+          sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
+          sed -i 's/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
 
       - name: 删除部分packages文件
         run: |
@@ -100,6 +106,7 @@ jobs:
           rm -rf shadowsocks-rust
           rm -rf shadowsocksr-libev
           rm -rf simple-obfs
+          rm -rf sing-box
           rm -rf smartdns
           rm -rf ssocks
           rm -rf tcping
@@ -128,6 +135,23 @@ jobs:
           mkdir openwrt-packages
           cd openwrt-packages
           git clone https://github.com/fw876/helloworld
+          sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
+          sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '154s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '208,215d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '227s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
+          sed -i '152,162d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '152a o:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '228,235d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '236a \\to:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
+          sed -i '203s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
+          sed -i '/commit firewall/a\
+          \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
+          sed -i '13s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '26s/1/0/g' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '43,44d' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
+          sed -i '/list Interface '\''lan'\''/i\
+          \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf qBittorrent-static
@@ -154,6 +178,10 @@ jobs:
           # DNSMASQ-FULL支持:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
+          CONFIG_PACKAGE_dnsmasq_full_ipset=y
+          # CONFIG_PACKAGE_dnsmasq_full_nftset is not set
+          CONFIG_PACKAGE_firewall=y
+          # CONFIG_PACKAGE_firewall4 is not set
           # CONFIG_PACKAGE_ipv6helper is not set
           CONFIG_PACKAGE_odhcp6c=y
           CONFIG_PACKAGE_odhcpd-ipv6only=y
@@ -179,39 +207,37 @@ jobs:
           # CONFIG_PACKAGE_luci-app-cpufreq is not set
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
+          CONFIG_PACKAGE_luci-app-samba4=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ChinaDNS_NG=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS_RUST is not set
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2TCP is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNSPROXY is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_MosDNS is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Tuic_Client is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadow_TLS is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_IPT2Socks is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2 is not set
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_V2ray_Plugin is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Server is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan is not set
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
+          CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_btop=y
+          CONFIG_PACKAGE_smartdns=y
+          CONFIG_PACKAGE_smartdns-ui=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
@@ -244,25 +270,12 @@ jobs:
 
       - name: 固件整理
         run: |
-          mkdir -p ./artifact/package
-          mkdir -p ./artifact/buildinfo
+          mkdir -p ./artifact/firmware
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/packages/ -type f -name "*.apk") ./artifact/package/
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-      - name: Upload buildinfo
-        uses: actions/upload-artifact@v4
-        with:
-          name: OpenWrt_buildinfo
-          path: ./artifact/buildinfo/
-
-      - name: Upload package
-        uses: actions/upload-artifact@v4
-        with:
-          name: OpenWrt_package
-          path: ./artifact/package/
+          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*sysupgrade.img.gz" -o -name "sha256sums") ./artifact/firmware/
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_firmware
-          path: ./bin/targets/
+          path: ./artifact/firmware/
