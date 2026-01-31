@@ -74,6 +74,7 @@ jobs:
         run: |
           sed -i '6s/1/0/g' package/network/config/firewall/files/firewall.config
           sed -i '7s/1/0/g' package/network/config/firewall/files/firewall.config
+          sed -i '16,18d' package/emortal/default-settings/files/99-default-settings
           sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
@@ -174,10 +175,6 @@ jobs:
           # DNSMASQ-FULL支持:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
-          CONFIG_PACKAGE_dnsmasq_full_ipset=y
-          # CONFIG_PACKAGE_dnsmasq_full_nftset is not set
-          CONFIG_PACKAGE_firewall=y
-          # CONFIG_PACKAGE_firewall4 is not set
           # CONFIG_PACKAGE_ipv6helper is not set
           CONFIG_PACKAGE_odhcp6c=y
           CONFIG_PACKAGE_odhcpd-ipv6only=y
@@ -266,12 +263,25 @@ jobs:
 
       - name: 固件整理
         run: |
-          mkdir -p ./artifact/firmware
+          mkdir -p ./artifact/package
+          mkdir -p ./artifact/buildinfo
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*sysupgrade.img.gz" -o -name "sha256sums") ./artifact/firmware/
+          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
+          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+      - name: Upload buildinfo
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenWrt_buildinfo
+          path: ./artifact/buildinfo/
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenWrt_package
+          path: ./artifact/package/
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_firmware
-          path: ./artifact/firmware/
+          path: ./bin/targets/
