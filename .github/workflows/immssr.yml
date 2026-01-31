@@ -141,10 +141,6 @@ jobs:
           sed -i '154s/0/1/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '208,215d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
           sed -i '227s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
-          sed -i '152,162d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '152a o:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '228,235d' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
-          sed -i '236a \\to:value("127.0.0.1:6553", translate("Custom DNS (127.0.0.1:6553)"))' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/client.lua
           sed -i '203s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/servers.lua
           sed -i '/commit firewall/a\
           \tset uhttpd.main.max_requests=50\n\tcommit uhttpd' helloworld/luci-app-ssr-plus/root/etc/uci-defaults/luci-ssr-plus
