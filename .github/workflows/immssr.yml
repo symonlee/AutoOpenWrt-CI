@@ -184,6 +184,7 @@ jobs:
           CONFIG_PACKAGE_odhcpd-ipv6only=y
 
           # 文件系统支持:
+          # CONFIG_USE_APK is not set
           CONFIG_PACKAGE_block-mount=y
           CONFIG_PACKAGE_kmod-fs-exfat=y
           CONFIG_PACKAGE_kmod-fs-ext4=y
@@ -205,7 +206,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
           CONFIG_PACKAGE_luci-app-samba4=y
-          CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy=y
@@ -270,7 +270,7 @@ jobs:
           mkdir -p ./artifact/package
           mkdir -p ./artifact/buildinfo
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/packages/ -type f -name "*.apk") ./artifact/package/
+          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
           cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
       - name: Upload buildinfo
         uses: actions/upload-artifact@v4
