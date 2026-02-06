@@ -132,8 +132,12 @@ jobs:
 
       - name: golang latest version
         run: |
-          rm -rf feeds/packages/lang/golang
-          git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
+          git clone --depth=1 --filter=blob:none --sparse -b master https://github.com/openwrt/packages.git
+          cd packages
+          git sparse-checkout init --cone
+          git sparse-checkout set lang/golang
+          rm -rf ../feeds/packages/lang/golang
+          cp -r lang/golang ../feeds/packages/lang/
 
       - name: 安装feeds源
         run: |
