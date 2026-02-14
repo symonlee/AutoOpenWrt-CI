@@ -132,7 +132,7 @@ jobs:
 
       - name: golang latest version
         run: |
-          git clone --depth=1 --filter=blob:none --sparse -b openwrt-25.12 https://github.com/openwrt/packages.git
+          git clone --depth=1 --filter=blob:none --sparse -b openwrt-24.10 https://github.com/ikghx/packages.git
           cd packages
           git sparse-checkout init --cone
           git sparse-checkout set lang/golang
