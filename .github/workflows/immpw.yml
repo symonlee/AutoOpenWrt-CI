@@ -48,9 +48,6 @@ jobs:
           sudo -E apt clean
           sudo -E timedatectl set-timezone "Asia/Hong_Kong"
 
-      - name: 校验本地文件
-        uses: actions/checkout@v4
-
       - name: 释放磁盘空间 (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
@@ -66,9 +63,11 @@ jobs:
           swap-storage: true
 
       - name: 克隆源码
-        run: |
-          git clone -b master --single-branch https://github.com/immortalwrt/immortalwrt openwrt
-          mv ./openwrt/* ./
+        uses: actions/checkout@v4
+        with:
+          repository: immortalwrt/immortalwrt
+          ref: master
+          fetch-depth: 0
 
       - name: 修改部分patch文件
         run: |
@@ -142,6 +141,11 @@ jobs:
       - name: 安装feeds源
         run: |
           ./scripts/feeds install -a
+
+      - name: Cache toolchain
+        uses: HiGarfield/cachewrtbuild@main
+        with:
+          ccache: 'true'
 
       - name: 构建自定义文件结构
         run: |
