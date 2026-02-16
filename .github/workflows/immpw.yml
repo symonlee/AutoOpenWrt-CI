@@ -252,7 +252,7 @@ jobs:
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
-          make defconfig
+          echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config; make defconfig
 
       - name: 进行固件编译
         run: |
