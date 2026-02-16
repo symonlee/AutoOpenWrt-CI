@@ -110,6 +110,7 @@ jobs:
           rm -rf ipt2socks
           rm -rf microsocks
           rm -rf mosdns
+          rm -rf onionshare-cli
           rm -rf naiveproxy
           rm -rf pdnsd-alt
           rm -rf shadowsocks-rust
@@ -161,7 +162,7 @@ jobs:
           pushd xipk
           rm -rf qBittorrent-static
           rm -rf qBittorrent
-          rm -rf dnsproxy
+          rm -rf luci-app-dnsproxy
 
       - name: 载入自定义配置
         run: |
