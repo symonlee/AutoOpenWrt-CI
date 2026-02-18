@@ -195,6 +195,7 @@ jobs:
           CONFIG_PACKAGE_kmod-fs-exfat=y
           CONFIG_PACKAGE_kmod-fs-ext4=y
           CONFIG_PACKAGE_kmod-fs-vfat=y
+          CONFIG_PACKAGE_shadow-utils=y
           CONFIG_PACKAGE_kmod-usb-storage=y
           CONFIG_PACKAGE_kmod-usb-storage-extras=y
           CONFIG_PACKAGE_kmod-usb-storage-uas=y
@@ -211,13 +212,13 @@ jobs:
           # CONFIG_PACKAGE_luci-app-cpufreq is not set
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
-          CONFIG_PACKAGE_luci-app-samba4=y
+          CONFIG_PACKAGE_luci-app-ksmbd=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server=y
@@ -239,8 +240,8 @@ jobs:
           # 常用软件包:
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_btop=y
-          CONFIG_PACKAGE_smartdns=y
-          CONFIG_PACKAGE_smartdns-ui=y
+          CONFIG_PACKAGE_adguardhome=y
+
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
