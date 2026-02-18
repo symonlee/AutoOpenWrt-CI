@@ -48,9 +48,6 @@ jobs:
           sudo -E apt clean
           sudo -E timedatectl set-timezone "Asia/Hong_Kong"
 
-      - name: 校验本地文件
-        uses: actions/checkout@v4
-
       - name: 释放磁盘空间 (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
@@ -66,14 +63,17 @@ jobs:
           swap-storage: true
 
       - name: 克隆源码
-        run: |
-          git clone -b master --single-branch https://github.com/immortalwrt/immortalwrt openwrt
-          mv ./openwrt/* ./
+        uses: actions/checkout@v4
+        with:
+          repository: immortalwrt/immortalwrt
+          ref: master
+          fetch-depth: 0
 
       - name: 修改部分patch文件
         run: |
           sed -i '6s/1/0/g' package/network/config/firewall/files/firewall.config
           sed -i '7s/1/0/g' package/network/config/firewall/files/firewall.config
+          sed -i '16,18d' package/emortal/default-settings/files/99-default-settings
           sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
@@ -105,6 +105,7 @@ jobs:
           rm -rf ipt2socks
           rm -rf microsocks
           rm -rf mosdns
+          rm -rf onionshare-cli
           rm -rf naiveproxy
           rm -rf pdnsd-alt
           rm -rf shadowsocks-rust
@@ -137,6 +138,11 @@ jobs:
         run: |
           ./scripts/feeds install -a
 
+      - name: Cache toolchain
+        uses: stupidloud/cachewrtbuild@main
+        with:
+          ccache: 'true'
+
       - name: 构建自定义文件结构
         run: |
           cd package
@@ -161,6 +167,7 @@ jobs:
           rm -rf qBittorrent-static
           rm -rf qBittorrent
           rm -rf dnsproxy
+          rm -rf luci-app-dnsproxy
 
       - name: 载入自定义配置
         run: |
@@ -212,16 +219,14 @@ jobs:
           # CONFIG_PACKAGE_luci-app-cpufreq is not set
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
-
+          CONFIG_PACKAGE_luci-app-ksmbd=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy is not set
-
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client is not set
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server is not set
-
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY is not set
@@ -235,15 +240,15 @@ jobs:
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
-          
-
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
+          CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_btop=y
-          CONFIG_PACKAGE_adguardhome=y
-
+          CONFIG_PACKAGE_smartdns=y
+          CONFIG_PACKAGE_smartdns-ui=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
