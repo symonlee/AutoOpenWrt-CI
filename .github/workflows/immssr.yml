@@ -91,6 +91,12 @@ jobs:
         run: |
           sed -i 's/+luci-app-attendedsysupgrade/+luci-app-ttyd/g' feeds/luci/collections/luci/Makefile
 
+      - name: 删除部分luci文件
+        run: |
+          pushd feeds/luci/applications
+          rm -rf luci-app-mjpg-streamer
+          rm -rf luci-app-passwall
+
       - name: 删除部分packages文件
         run: |
           pushd feeds/packages/net
