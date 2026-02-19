@@ -262,6 +262,12 @@ jobs:
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
 
+          - name: 确认 GCC 版本
+          run: |
+          echo "========= 当前配置的 GCC 版本 ========="
+          grep "CONFIG_GCC_VERSION" immortalwrt/.config
+          echo "======================================"
+
       - name: 进行固件编译
         run: |
           make -j$(nproc) || make -j1 V=s
