@@ -96,6 +96,7 @@ jobs:
           pushd feeds/luci/applications
           rm -rf luci-app-mjpg-streamer
           rm -rf luci-app-passwall
+          rm -rf luci-app-qbittorrent
 
       - name: 删除部分packages文件
         run: |
@@ -152,7 +153,6 @@ jobs:
           popd
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
-          rm -rf qBittorrent-static
           rm -rf qBittorrent
           rm -rf luci-app-dnsproxy
 
@@ -230,6 +230,8 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
           CONFIG_PACKAGE_luci-app-qbittorrent=y
+          CONFIG_PACKAGE_luci-app-qbittorrent_static=y
+          # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
