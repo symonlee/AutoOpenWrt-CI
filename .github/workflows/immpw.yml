@@ -86,9 +86,6 @@ jobs:
         run: |
           sed -i 's/system/services/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
           sed -i 's/nas/services/g' feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
-          find feeds/packages/ -name "Makefile" | grep "libutp" | xargs sed -i 's/DLIBUTP_ENABLE_WERROR:BOOL=YES/DLIBUTP_ENABLE_WERROR:BOOL=NO/'
-          find feeds/packages/ -name "Makefile" | grep "libutp" | xargs sed -i '/PKG_NAME:=libutp/a TARGET_CFLAGS += -Wno-error=implicit-function-declaration -Wno-error=int-conversion -Wno-error=incompatible-pointer-types'
-          find feeds/packages/ -name "Makefile" | grep "libtorrent-rasterbar" | xargs sed -i '/PKG_NAME:=libtorrent-rasterbar/a TARGET_CFLAGS += -Wno-error=deprecated-declarations -Wno-error=implicit-function-declaration -Wno-error=int-conversion -Wno-error=maybe-uninitialized'
 
       - name: 替换部分默认luci组件
         run: |
@@ -97,6 +94,7 @@ jobs:
       - name: 删除部分luci文件
         run: |
           pushd feeds/luci/applications
+          rm -rf luci-app-mjpg-streamer
           rm -rf luci-app-passwall
 
       - name: 删除部分packages文件
@@ -230,6 +228,8 @@ jobs:
           # 常用软件包:
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_btop=y
+          CONFIG_PACKAGE_smartdns=y
+          CONFIG_PACKAGE_smartdns-ui=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
