@@ -161,7 +161,6 @@ jobs:
           \tlist wan_fw_ips '\''104.16.249.249'\''\n\tlist wan_fw_ips '\''104.16.248.249'\''\n\tlist wan_fw_ips '\''8.8.8.8'\''\n\tlist wan_fw_ips '\''8.8.4.4'\''\n\tlist wan_fw_ips '\''1.1.1.1'\''\n\tlist wan_fw_ips '\''1.0.0.1'\''' helloworld/luci-app-ssr-plus/root/usr/share/shadowsocksr/shadowsocksr.config
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
-          rm -rf qBittorrent-static
           rm -rf qBittorrent
           rm -rf dnsproxy
           rm -rf luci-app-dnsproxy
@@ -245,7 +244,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
+          # CONFIG_PACKAGE_luci-app-qbittorrent is not set
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
