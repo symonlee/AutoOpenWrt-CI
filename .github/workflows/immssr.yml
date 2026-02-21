@@ -66,7 +66,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: immortalwrt/immortalwrt
-          ref: master
+          ref: openwrt-25.12
           fetch-depth: 0
 
       - name: 修改部分patch文件
@@ -207,13 +207,6 @@ jobs:
           CONFIG_PACKAGE_kmod-usb2-pci=y
           CONFIG_PACKAGE_kmod-usb3=y
 
-          # GCC版本切换:
-          CONFIG_DEVEL=y
-          CONFIG_TOOLCHAINOPTS=y
-          CONFIG_GCC_USE_VERSION_13=y
-          # CONFIG_GCC_USE_VERSION_14 is not set
-          # CONFIG_GCC_USE_VERSION_15 is not set
-
           # 系统中文支持:
           CONFIG_PACKAGE_default-settings-chn=y
 
@@ -292,5 +285,5 @@ jobs:
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt_firmware
+          name: OpenWrt_firmware.zip
           path: ./artifact/firmware/
