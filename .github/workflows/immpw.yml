@@ -272,17 +272,17 @@ jobs:
       - name: Upload buildinfo
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt_buildinfo
+          name: OpenWrt_buildinfo.zip
           path: ./artifact/buildinfo/
 
       - name: Upload package
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt_package
+          name: OpenWrt_package.zip
           path: ./artifact/package/
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
-          name: OpenWrt_firmware
+          name: OpenWrt_firmware.zip
           path: ./bin/targets/
