@@ -146,7 +146,6 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone -b 4.4.5 --single-branch https://github.com/xcyll/luci-app-qbittorrent
           git clone https://github.com/fw876/helloworld
           sed -i '16d' helloworld/luci-app-ssr-plus/Makefile
           sed -i '64s/1/0/g' helloworld/luci-app-ssr-plus/luasrc/model/cbi/shadowsocksr/advanced.lua
