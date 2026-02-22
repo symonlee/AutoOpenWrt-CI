@@ -184,10 +184,6 @@ jobs:
           # DNSMASQ-FULL支持:
           # CONFIG_PACKAGE_dnsmasq is not set
           CONFIG_PACKAGE_dnsmasq-full=y
-          CONFIG_PACKAGE_dnsmasq_full_ipset=y
-          # CONFIG_PACKAGE_dnsmasq_full_nftset is not set
-          CONFIG_PACKAGE_firewall=y
-          # CONFIG_PACKAGE_firewall4 is not set
           # CONFIG_PACKAGE_ipv6helper is not set
           CONFIG_PACKAGE_odhcp6c=y
           CONFIG_PACKAGE_odhcpd-ipv6only=y
@@ -216,8 +212,8 @@ jobs:
           CONFIG_PACKAGE_luci-app-package-manager=y
           CONFIG_PACKAGE_luci-app-ksmbd=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy is not set
+          # CONFIG_PACKAGE_luci-app-ssr-plus_Iptables_Transparent_Proxy is not set
+          CONFIG_PACKAGE_luci-app-ssr-plus_Nftables_Transparent_Proxy=y
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client=y
