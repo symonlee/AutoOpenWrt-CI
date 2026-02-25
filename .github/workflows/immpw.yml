@@ -224,7 +224,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-qbittorrent_static=y
           # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
-          CONFIG_PACKAGE_luci-app-smartdns=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
