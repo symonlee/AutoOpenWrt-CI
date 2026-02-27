@@ -231,6 +231,7 @@ jobs:
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_smartdns=y
+          CONFIG_PACKAGE_smartdns-ui=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
