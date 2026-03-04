@@ -66,7 +66,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: immortalwrt/immortalwrt
-          ref: openwrt-25.12
+          ref: master
           fetch-depth: 0
 
       - name: 修改部分patch文件
@@ -90,6 +90,10 @@ jobs:
       - name: 替换部分默认luci组件
         run: |
           sed -i 's/+luci-app-attendedsysupgrade/+luci-app-ttyd/g' feeds/luci/collections/luci/Makefile
+
+      - name: 禁用 CI LLVM
+        run: |
+          sed -i 's/download-ci-llvm=true/download-ci-llvm=false/g' feeds/packages/lang/rust/Makefile
 
       - name: 删除部分luci文件
         run: |
