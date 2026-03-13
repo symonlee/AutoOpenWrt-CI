@@ -131,11 +131,6 @@ jobs:
           rm -rf xray-core
           rm -rf xray-plugin
 
-      - name: golang latest version
-        run: |
-          rm -rf feeds/packages/lang/golang
-          git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
-
       - name: 安装feeds源
         run: |
           ./scripts/feeds install -a
@@ -216,7 +211,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-passwall=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server is not set
-          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Server is not set
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs is not set
@@ -234,6 +229,7 @@ jobs:
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_btop=y
           CONFIG_PACKAGE_smartdns=y
+          CONFIG_PACKAGE_smartdns-ui=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
