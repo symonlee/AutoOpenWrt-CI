@@ -82,6 +82,10 @@ jobs:
         run: |
           sed -i 's/+luci-app-attendedsysupgrade/+luci-app-ttyd/g' feeds/luci/collections/luci/Makefile
 
+      - name: 禁用 CI LLVM
+        run: |
+          sed -i 's/download-ci-llvm=true/download-ci-llvm=false/g' feeds/packages/lang/rust/Makefile
+
       - name: 删除部分luci文件
         run: |
           pushd feeds/other/lean
