@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: lieo🌼
+name: immpw+
 
 on:
   push:
@@ -65,9 +65,17 @@ jobs:
       - name: 克隆源码
         uses: actions/checkout@v4
         with:
-          repository: Lienol/openwrt
-          ref: 25.12
+          repository: immortalwrt/immortalwrt
+          ref: master
           fetch-depth: 0
+
+      - name: 修改部分patch文件
+        run: |
+          sed -i '6s/1/0/g' package/network/config/firewall/files/firewall.config
+          sed -i '7s/1/0/g' package/network/config/firewall/files/firewall.config
+          sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
+          sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
+          sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
 
       - name: 更新feeds源
         run: |
@@ -82,16 +90,11 @@ jobs:
         run: |
           sed -i 's/+luci-app-attendedsysupgrade/+luci-app-ttyd/g' feeds/luci/collections/luci/Makefile
 
-      - name: 禁用 CI LLVM
-        run: |
-          sed -i 's/download-ci-llvm=true/download-ci-llvm=false/g' feeds/packages/lang/rust/Makefile
-
       - name: 删除部分luci文件
         run: |
-          pushd feeds/other/lean
-          rm -rf luci-app-qbittorrent
-          rm -rf qBittorrent
-          rm -rf qBittorrent-static
+          pushd feeds/luci/applications
+          rm -rf luci-app-mjpg-streamer
+          rm -rf luci-app-passwall
 
       - name: 删除部分packages文件
         run: |
@@ -110,8 +113,6 @@ jobs:
           rm -rf onionshare-cli
           rm -rf naiveproxy
           rm -rf pdnsd-alt
-          rm -rf qBittorrent-Enhanced-Edition
-          rm -rf qbittorrent
           rm -rf shadowsocks-rust
           rm -rf shadowsocksr-libev
           rm -rf simple-obfs
@@ -128,14 +129,6 @@ jobs:
           rm -rf v2ray-plugin
           rm -rf xray-core
           rm -rf xray-plugin
-
-      - name: rust-bindgen latest version
-        run: |
-          git clone --depth=1 --filter=blob:none --sparse -b master https://github.com/immortalwrt/packages.git
-          cd packages
-          git sparse-checkout init --cone
-          git sparse-checkout set devel/rust-bindgen
-          cp -r devel/rust-bindgen ../feeds/packages/devel/
 
       - name: 安装feeds源
         run: |
@@ -207,11 +200,10 @@ jobs:
           CONFIG_PACKAGE_kmod-usb3=y
 
           # 系统中文支持:
-          CONFIG_LUCI_LANG_zh_Hans=y
+          CONFIG_PACKAGE_default-settings-chn=y
 
           # 常用LuCI插件选择:
           # CONFIG_PACKAGE_luci-app-cpufreq is not set
-          # CONFIG_PACKAGE_luci-app-ddns is not set
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-package-manager=y
           CONFIG_PACKAGE_luci-app-samba4=y
@@ -228,21 +220,13 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
           CONFIG_PACKAGE_luci-app-qbittorrent=y
-          CONFIG_PACKAGE_luci-app-qbittorrent_static=y
-          # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
-          # CONFIG_PACKAGE_luci-app-ramfree is not set
-          CONFIG_PACKAGE_luci-app-turboacc=y
-          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_OFFLOADING=y
-          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y
           CONFIG_PACKAGE_luci-app-ttyd=y
-          # CONFIG_PACKAGE_luci-app-upnp is not set
-          # CONFIG_PACKAGE_luci-app-wol is not set
 
           # 常用软件包:
           CONFIG_PACKAGE_autocore=y
-          CONFIG_PACKAGE_automount=y
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_smartdns=y
+          CONFIG_PACKAGE_smartdns-ui=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
