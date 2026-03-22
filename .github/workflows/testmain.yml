@@ -152,6 +152,9 @@ jobs:
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf luci-app-dnsproxy
+          rm -rf luci-app-qbittorrent
+          rm -rf qBittorrent-static
+          rm -rf qbittorrent
 
       - name: 载入自定义配置
         run: |
