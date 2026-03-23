@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: imm-pw
+name: masterpw+
 
 on:
   push:
