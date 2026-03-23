@@ -76,6 +76,7 @@ jobs:
           sed -i '29s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '30s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
           sed -i '31s/1/0/g' package/network/config/firewall4/patches/001-firewall4-add-support-for-fullcone-nat.patch
+          sed -i '26s/1/0/g' package/network/services/dnsmasq/files/dhcp.conf
 
       - name: 更新feeds源
         run: |
