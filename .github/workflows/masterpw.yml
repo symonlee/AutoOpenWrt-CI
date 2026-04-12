@@ -148,9 +148,6 @@ jobs:
           cd openwrt-packages
           git clone -b main --single-branch https://github.com/Openwrt-Passwall/openwrt-passwall luci-app-passwall
           git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages
-          pushd luci-app-passwall/luci-app-passwall/root/etc
-          rm -rf hotplug.d
-          popd
           git clone https://github.com/symonlee/openwrt-smartdns xipk
           pushd xipk
           rm -rf luci-app-dnsproxy
