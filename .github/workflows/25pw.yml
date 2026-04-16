@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: immpw+
+name: 25.12pw+
 
 on:
   push:
@@ -66,7 +66,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: immortalwrt/immortalwrt
-          ref: openwrt-24.10
+          ref: openwrt-25.12
           fetch-depth: 0
 
       - name: 修改部分patch文件
@@ -131,11 +131,6 @@ jobs:
           rm -rf v2ray-plugin
           rm -rf xray-core
           rm -rf xray-plugin
-
-      - name: golang latest version
-        run: |
-          rm -rf feeds/packages/lang/golang
-          git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
 
       - name: 安装feeds源
         run: |
@@ -265,7 +260,7 @@ jobs:
           mkdir -p ./artifact/package
           mkdir -p ./artifact/buildinfo
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
+          cp -rf $(find ./bin/packages/ -type f -name "*.apk") ./artifact/package/
           cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
       - name: Upload buildinfo
         uses: actions/upload-artifact@v4
