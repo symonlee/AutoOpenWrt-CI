@@ -116,6 +116,7 @@ jobs:
           rm -rf onionshare-cli
           rm -rf naiveproxy
           rm -rf pdnsd-alt
+          rm -rf qbittorrent
           rm -rf shadowsocks-rust
           rm -rf shadowsocksr-libev
           rm -rf simple-obfs
