@@ -108,7 +108,6 @@ jobs:
           rm -rf dns2tcp
           rm -rf dnsproxy
           rm -rf geoview
-          rm -rf haproxy
           rm -rf hysteria
           rm -rf ipt2socks
           rm -rf microsocks
