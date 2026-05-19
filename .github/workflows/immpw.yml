@@ -10,7 +10,7 @@
 # <https://github.com/LemoFire/autoOpenWrt>
 #
 
-name: masterpw+
+name: immpw+
 
 on:
   push:
@@ -66,7 +66,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: immortalwrt/immortalwrt
-          ref: master
+          ref: openwrt-24.10
           fetch-depth: 0
 
       - name: 修改部分patch文件
@@ -133,6 +133,11 @@ jobs:
           rm -rf xray-core
           rm -rf xray-plugin
 
+      - name: golang latest version
+        run: |
+          rm -rf feeds/packages/lang/golang
+          git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
+
       - name: 安装feeds源
         run: |
           ./scripts/feeds install -a
@@ -171,7 +176,6 @@ jobs:
           CONFIG_TARGET_rockchip=y
           CONFIG_TARGET_rockchip_armv8=y
           CONFIG_TARGET_rockchip_armv8_DEVICE_friendlyarm_nanopi-r6s=y
-          CONFIG_TESTING_KERNEL=y
 
           # 编译ext4固件:
           # CONFIG_TARGET_ROOTFS_EXT4FS is not set
@@ -261,7 +265,7 @@ jobs:
           mkdir -p ./artifact/package
           mkdir -p ./artifact/buildinfo
           rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/packages/ -type f -name "*.apk") ./artifact/package/
+          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
           cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
       - name: Upload buildinfo
         uses: actions/upload-artifact@v4
