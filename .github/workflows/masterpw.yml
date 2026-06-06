@@ -171,7 +171,6 @@ jobs:
           CONFIG_TARGET_rockchip=y
           CONFIG_TARGET_rockchip_armv8=y
           CONFIG_TARGET_rockchip_armv8_DEVICE_friendlyarm_nanopi-r6s=y
-          CONFIG_TESTING_KERNEL=y
 
           # 编译ext4固件:
           # CONFIG_TARGET_ROOTFS_EXT4FS is not set
