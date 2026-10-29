@@ -147,7 +147,7 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/QiuSimons/luci-app-honk
+          git clone https://github.com/daeuniverse/openwrt-packages
           git clone -b main --single-branch https://github.com/Openwrt-Passwall/openwrt-passwall luci-app-passwall
           git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages
           pushd openwrt-passwall-packages
