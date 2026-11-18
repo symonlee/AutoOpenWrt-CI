@@ -66,7 +66,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: immortalwrt/immortalwrt
-          ref: master
+          ref: v25.12.2
           fetch-depth: 0
 
       - name: 修改部分patch文件
@@ -225,7 +225,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-qbittorrent_static=y
           # CONFIG_PACKAGE_luci-app-qbittorrent_dynamic is not set
-          CONFIG_PACKAGE_luci-app-sqm=y
           CONFIG_PACKAGE_luci-app-ttyd=y
 
           # 常用软件包:
