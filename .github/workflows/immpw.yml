@@ -167,7 +167,7 @@ jobs:
           sed -i "s/'redirect'/'tproxy'/g" package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '6s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '8s/tcp/udp/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
-          sed -i '9s/1.1.1.1/127.0.0.1:6553/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i '9s/1.1.1.1/127.0.0.1:5339/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '12s/none/chn/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '22s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '89,101d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
@@ -237,8 +237,8 @@ jobs:
           # 常用软件包:
           CONFIG_PACKAGE_autocore=y
           CONFIG_PACKAGE_htop=y
-          CONFIG_PACKAGE_smartdns=y
-          CONFIG_PACKAGE_smartdns-ui=y
+          CONFIG_PACKAGE_adguardhome=y
+          CONFIG_PACKAGE_AdGuardHome=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_bind-dig=y
           CONFIG_PACKAGE_ca-certificates=y
