@@ -165,7 +165,7 @@ jobs:
         run: |
           sed -i 's/+dns2socks //g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/Makefile
           sed -i "s/'redirect'/'tproxy'/g" package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
-          sed -i "/option dns_mode 'tcp'/{s|option dns_mode 'tcp'|option dns_mode 'sing-box'\n\toption v2ray_dns_mode 'doh'\n\toption remote_dns_doh 'https://dns.google/dns-query,8.8.4.4'\n\toption remote_rewrite_ttl '300'|;n;/option remote_dns '1.1.1.1'/d}" package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
+          sed -i "/option dns_mode 'tcp'/{s|option dns_mode 'tcp'|option dns_mode 'sing-box'\n\toption v2ray_dns_mode 'doh'\n\toption remote_dns_doh 'https://dns.google/dns-query,8.8.4.4'\n\toption remote_rewrite_ttl '30'|;n;/option remote_dns '1.1.1.1'/d}" package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '14s/none/chn/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '24s/1/0/g' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
           sed -i '91,101d' package/openwrt-packages/luci-app-passwall/luci-app-passwall/root/usr/share/passwall/0_default_config
